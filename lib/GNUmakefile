@@ -2,11 +2,20 @@ CC := clang
 AR := ar
 INC := inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
-LDFLAGS := -m32 -nostdlib -Wl,-shared
+LDFLAGS := -m32 -nostdlib
 OBJS := $(patsubst %.S,%.o,$(wildcard *.S))
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
+
+UNAME := $(shell uname -s)
+
+ifeq ($(UNAME),Darwin)
+LDFLAGS += -Wl,-dylib,-read_only_relocs,suppress
+LIB_SO := lib$(LIB_NAME).dylib
+else
+LDFLAGS += -Wl,-shared
 LIB_SO := lib$(LIB_NAME).so
+endif
 
 all: $(LIB_AR) $(LIB_SO)
 
