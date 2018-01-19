@@ -1,12 +1,12 @@
 CC := clang
 AR := ar
-CFLAGS := -m32 -nostdinc -Wall
+INC := inc
+CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS := -m32 -nostdlib -Wl,-shared
 OBJS := $(patsubst %.S,%.o,$(wildcard *.S))
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
-INC := inc
 
 all: $(LIB_AR) $(LIB_SO)
 
