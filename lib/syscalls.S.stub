@@ -1,0 +1,15 @@
+	.globl {NAME}
+	.type {NAME}, @function
+	{NAME}:
+		pushl %ebp
+		movl %esp, %ebp
+
+		pushl ARG_4(%ebp)
+		pushl ARG_3(%ebp)
+		pushl ARG_2(%ebp)
+		pushl ARG_1(%ebp)
+		movl ${NR}, %eax
+		call .Lkernel
+
+		jc .Lerror
+		jmp .Lreturn

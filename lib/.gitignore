@@ -1,2 +1,3 @@
+syscalls.S
 *.a
 *.so
