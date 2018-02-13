@@ -12,13 +12,13 @@
 		xorl %eax, %eax
 
 		cmpl $0, ERRNUM(%ebp)
-		jl return
+		jl .Lreturn
 
 		cmpl $sys_nerr, ERRNUM(%ebp)
-		jge return
+		jge .Lreturn
 
 		movl ERRNUM(%ebp), %eax
-	return:
+	.Lreturn:
 		movl sys_errlist(, %eax, 4), %eax
 
 		movl %ebp, %esp

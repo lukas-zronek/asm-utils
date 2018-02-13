@@ -7,11 +7,11 @@
 		addl %eax, %ebx
 		addl $4, %ebx
 
-		loop:
+		.Lloop:
 			addl $4, %ebx
 
 			cmpl $0, (%ebx)
-			je quit
+			je .Lquit
 
 			pushl %ebx
 			pushl (%ebx)
@@ -19,7 +19,7 @@
 			addl $4, %esp
 			popl %ebx
 
-			jmp loop
-		quit:
+			jmp .Lloop
+		.Lquit:
 			pushl $0
 			call exit

@@ -9,7 +9,7 @@
 		movl %esp, %ebp
 
 		cmpl $3, ARGC(%ebp)
-		jne error
+		jne .Lerror
 
 		pushl DEST(%ebp)
 		pushl SRC(%ebp)
@@ -17,14 +17,14 @@
 		addl $8, %esp
 
 		cmpl $0, %eax
-		jl rename_error
+		jl .Lrename_error
 
 		pushl $0
 		call exit
-	rename_error:
+	.Lrename_error:
 		pushl ARGV(%ebp)
 		call perror
 		addl $4, %esp
-	error:
+	.Lerror:
 		pushl $1
 		call exit

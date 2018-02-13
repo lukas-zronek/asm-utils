@@ -6,11 +6,11 @@
 		movl $2, %edi
 		addl (%ebp), %edi
 
-		loop:
+		.Lloop:
 			movl (%ebp, %edi, 4), %eax
 
 			cmpl $0, %eax
-			je quit
+			je .Lquit
 
 			pushl %edi
 			pushl %eax
@@ -22,7 +22,7 @@
 
 			incl %edi
 
-			jmp loop
-		quit:
+			jmp .Lloop
+		.Lquit:
 			pushl $0
 			call exit

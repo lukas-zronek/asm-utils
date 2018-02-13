@@ -12,23 +12,23 @@
 
 		movl ARG_COUNT(%ebp), %edi
 
-		loop:
+		.Lloop:
 			push 12(%ebp, %edi, 4)
 			decl %edi
 			cmpl $0, %edi
-			jg loop
+			jg .Lloop
 		movl SYS_NR(%ebp), %eax
-		call kernel
+		call .Lkernel
 
-		jc error
-		jmp return
-	error:
+		jc .Lerror
+		jmp .Lreturn
+	.Lerror:
 		movl %eax, _errno
 		movl $-1, %eax
-	return:
+	.Lreturn:
 		movl %ebp, %esp
 		popl %ebp
 		ret
-kernel:
+.Lkernel:
 	int $SYSCALL_VECTOR
         ret

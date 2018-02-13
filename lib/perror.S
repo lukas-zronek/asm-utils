@@ -5,7 +5,7 @@
 #define STRING 8
 
 .data
-	seperator:
+	.L.seperator:
 		.asciz ": "
 .text
 	.globl perror
@@ -19,7 +19,7 @@
 		call fprint
 		addl $8, %esp
 
-		pushl $seperator
+		pushl $.L.seperator
 		pushl $STDERR_FILENO
 		call fprint
 		addl $8, %esp

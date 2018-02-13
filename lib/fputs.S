@@ -2,7 +2,7 @@
 #define STRING 12
 
 .data
-	newline:
+	.L.newline:
 		.asciz "\n"
 .text
 	.globl fputs
@@ -16,7 +16,7 @@
 		call fprint
 		addl $8, %esp
 
-		pushl $newline
+		pushl $.L.newline
 		pushl FD(%ebp)
 		call fprint
 

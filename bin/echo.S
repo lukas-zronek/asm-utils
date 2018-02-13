@@ -1,8 +1,8 @@
 #include <io.h>
 .data
-	newline:
+	.L.newline:
 		.asciz "\n"
-	space:
+	.L.space:
 		.asciz " "
 .text
 	.globl _start
@@ -10,12 +10,12 @@
 		movl %esp, %ebp
 
 		cmpl $1, (%ebp)
-		je quit
+		je .Lquit
 
 		movl $2, %edi
-	loop_start:
+	.Lloop_start:
 		cmpl (%ebp), %edi
-		jg loop_exit
+		jg .Lloop_exit
 
 		pushl %edi
 		pushl (%ebp, %edi, 4)
@@ -27,18 +27,18 @@
 		incl %edi
 
 		pushl %edi
-		pushl $space
+		pushl $.L.space
 		pushl $STDOUT_FILENO
 		call fprint
 		addl $8, %esp
 		popl %edi
 
-		jmp loop_start
-	loop_exit:
-		pushl $newline
+		jmp .Lloop_start
+	.Lloop_exit:
+		pushl $.L.newline
 		pushl $STDOUT_FILENO
 		call fprint
 		addl $8, %esp
-	quit:
+	.Lquit:
 		pushl $0
 		call exit

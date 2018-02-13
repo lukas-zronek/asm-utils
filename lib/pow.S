@@ -12,16 +12,16 @@
 		movl BASE(%esp), %ebx
 		movl POWER(%esp), %edi
 
-		loop:
+		.Lloop:
 			cmpl $0, %edi
-			je quit
+			je .Lquit
 
 			mull %ebx
 
 			decl %edi
 
-			jmp loop
-		quit: 
+			jmp .Lloop
+		.Lquit: 
 			movl %ebp, %esp
 			popl %ebp
 			ret

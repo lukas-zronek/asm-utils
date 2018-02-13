@@ -31,321 +31,321 @@
 # extern const char * const sys_errlist[];
 # extern const int sys_nerr;
 .data
-	error.0:
+	.L.error.0:
 		.asciz "No error: 0"				/*  0 - ENOERROR */
-	error.1:
+	.L.error.1:
 		.asciz "Operation not permitted"		/*  1 - EPERM */
-	error.2:
+	.L.error.2:
 		.asciz "No such file or directory"		/*  2 - ENOENT */
-	error.3:
+	.L.error.3:
 		.asciz "No such process"			/*  3 - ESRCH */
-	error.4:
+	.L.error.4:
 		.asciz "Interrupted system call"		/*  4 - EINTR */
-	error.5:
+	.L.error.5:
 		.asciz "Input/output error"			/*  5 - EIO */
-	error.6:
+	.L.error.6:
 		.asciz "Device not configured"		/*  6 - ENXIO */
-	error.7:
+	.L.error.7:
 		.asciz "Argument list too long"		/*  7 - E2BIG */
-	error.8:
+	.L.error.8:
 		.asciz "Exec format error"			/*  8 - ENOEXEC */
-	error.9:
+	.L.error.9:
 		.asciz "Bad file descriptor"			/*  9 - EBADF */
-	error.10:
+	.L.error.10:
 		.asciz "No child processes"			/* 10 - ECHILD */
-	error.11:
+	.L.error.11:
 		.asciz "Resource deadlock avoided"		/* 11 - EDEADLK */
-	error.12:
+	.L.error.12:
 		.asciz "Cannot allocate memory"		/* 12 - ENOMEM */
-	error.13:
+	.L.error.13:
 		.asciz "Permission denied"			/* 13 - EACCES */
-	error.14:
+	.L.error.14:
 		.asciz "Bad address"				/* 14 - EFAULT */
-	error.15:
+	.L.error.15:
 		.asciz "Block device required"		/* 15 - ENOTBLK */
-	error.16:
+	.L.error.16:
 		.asciz "Device busy"				/* 16 - EBUSY */
-	error.17:
+	.L.error.17:
 		.asciz "File exists"				/* 17 - EEXIST */
-	error.18:
+	.L.error.18:
 		.asciz "Cross-device link"			/* 18 - EXDEV */
-	error.19:
+	.L.error.19:
 		.asciz "Operation not supported by device"	/* 19 - ENODEV */
-	error.20:
+	.L.error.20:
 		.asciz "Not a directory"			/* 20 - ENOTDIR */
-	error.21:
+	.L.error.21:
 		.asciz "Is a directory"			/* 21 - EISDIR */
-	error.22:
+	.L.error.22:
 		.asciz "Invalid argument"			/* 22 - EINVAL */
-	error.23:
+	.L.error.23:
 		.asciz "Too many open files in system"	/* 23 - ENFILE */
-	error.24:
+	.L.error.24:
 		.asciz "Too many open files"			/* 24 - EMFILE */
-	error.25:
+	.L.error.25:
 		.asciz "Inappropriate ioctl for device"	/* 25 - ENOTTY */
-	error.26:
+	.L.error.26:
 		.asciz "Text file busy"			/* 26 - ETXTBSY */
-	error.27:
+	.L.error.27:
 		.asciz "File too large"			/* 27 - EFBIG */
-	error.28:
+	.L.error.28:
 		.asciz "No space left on device"		/* 28 - ENOSPC */
-	error.29:
+	.L.error.29:
 		.asciz "Illegal seek"				/* 29 - ESPIPE */
-	error.30:
+	.L.error.30:
 		.asciz "Read-only file system"		/* 30 - EROFS */
-	error.31:
+	.L.error.31:
 		.asciz "Too many links"			/* 31 - EMLINK */
-	error.32:
+	.L.error.32:
 		.asciz "Broken pipe"				/* 32 - EPIPE */
 
 /* math software */
-	error.33:
+	.L.error.33:
 		.asciz "Numerical argument out of domain"	/* 33 - EDOM */
-	error.34:
+	.L.error.34:
 		.asciz "Result too large"			/* 34 - ERANGE */
 
 /* non-blocking and interrupt i/o */
-	error.35:
+	.L.error.35:
 		.asciz "Resource temporarily unavailable"	/* 35 - EAGAIN */
 						/* 35 - EWOULDBLOCK */
-	error.36:
+	.L.error.36:
 		.asciz "Operation now in progress"		/* 36 - EINPROGRESS */
-	error.37:
+	.L.error.37:
 		.asciz "Operation already in progress"	/* 37 - EALREADY */
 
 /* ipc/network software -- argument errors */
-	error.38:
+	.L.error.38:
 		.asciz "Socket operation on non-socket"	/* 38 - ENOTSOCK */
-	error.39:
+	.L.error.39:
 		.asciz "Destination address required"		/* 39 - EDESTADDRREQ */
-	error.40:
+	.L.error.40:
 		.asciz "Message too long"			/* 40 - EMSGSIZE */
-	error.41:
+	.L.error.41:
 		.asciz "Protocol wrong type for socket"	/* 41 - EPROTOTYPE */
-	error.42:
+	.L.error.42:
 		.asciz "Protocol not available"		/* 42 - ENOPROTOOPT */
-	error.43:
+	.L.error.43:
 		.asciz "Protocol not supported"		/* 43 - EPROTONOSUPPORT */
-	error.44:
+	.L.error.44:
 		.asciz "Socket type not supported"		/* 44 - ESOCKTNOSUPPORT */
-	error.45:
+	.L.error.45:
 		.asciz "Operation not supported"		/* 45 - EOPNOTSUPP */
-	error.46:
+	.L.error.46:
 		.asciz "Protocol family not supported"	/* 46 - EPFNOSUPPORT */
 						/* 47 - EAFNOSUPPORT */
-	error.47:
+	.L.error.47:
 		.asciz "Address family not supported by protocol family"
-	error.48:
+	.L.error.48:
 		.asciz "Address already in use"		/* 48 - EADDRINUSE */
-	error.49:
+	.L.error.49:
 		.asciz "Can't assign requested address"	/* 49 - EADDRNOTAVAIL */
 
 /* ipc/network software -- operational errors */
-	error.50:
+	.L.error.50:
 		.asciz "Network is down"			/* 50 - ENETDOWN */
-	error.51:
+	.L.error.51:
 		.asciz "Network is unreachable"		/* 51 - ENETUNREACH */
-	error.52:
+	.L.error.52:
 		.asciz "Network dropped connection on reset"	/* 52 - ENETRESET */
-	error.53:
+	.L.error.53:
 		.asciz "Software caused connection abort"	/* 53 - ECONNABORTED */
-	error.54:
+	.L.error.54:
 		.asciz "Connection reset by peer"		/* 54 - ECONNRESET */
-	error.55:
+	.L.error.55:
 		.asciz "No buffer space available"		/* 55 - ENOBUFS */
-	error.56:
+	.L.error.56:
 		.asciz "Socket is already connected"		/* 56 - EISCONN */
-	error.57:
+	.L.error.57:
 		.asciz "Socket is not connected"		/* 57 - ENOTCONN */
-	error.58:
+	.L.error.58:
 		.asciz "Can't send after socket shutdown"	/* 58 - ESHUTDOWN */
-	error.59:
+	.L.error.59:
 		.asciz "Too many references: can't splice"	/* 59 - ETOOMANYREFS */
-	error.60:
+	.L.error.60:
 		.asciz "Operation timed out"			/* 60 - ETIMEDOUT */
-	error.61:
+	.L.error.61:
 		.asciz "Connection refused"			/* 61 - ECONNREFUSED */
 
-	error.62:
+	.L.error.62:
 		.asciz "Too many levels of symbolic links"	/* 62 - ELOOP */
-	error.63:
+	.L.error.63:
 		.asciz "File name too long"			/* 63 - ENAMETOOLONG */
 
 /* should be rearranged */
-	error.64:
+	.L.error.64:
 		.asciz "Host is down"				/* 64 - EHOSTDOWN */
-	error.65:
+	.L.error.65:
 		.asciz "No route to host"			/* 65 - EHOSTUNREACH */
-	error.66:
+	.L.error.66:
 		.asciz "Directory not empty"			/* 66 - ENOTEMPTY */
 
 /* quotas & mush */
-	error.67:
+	.L.error.67:
 		.asciz "Too many processes"			/* 67 - EPROCLIM */
-	error.68:
+	.L.error.68:
 		.asciz "Too many users"			/* 68 - EUSERS */
-	error.69:
+	.L.error.69:
 		.asciz "Disc quota exceeded"			/* 69 - EDQUOT */
 
 /* Network File System */
-	error.70:
+	.L.error.70:
 		.asciz "Stale NFS file handle"		/* 70 - ESTALE */
-	error.71:
+	.L.error.71:
 		.asciz "Too many levels of remote in path"	/* 71 - EREMOTE */
-	error.72:
+	.L.error.72:
 		.asciz "RPC struct is bad"			/* 72 - EBADRPC */
-	error.73:
+	.L.error.73:
 		.asciz "RPC version wrong"			/* 73 - ERPCMISMATCH */
-	error.74:
+	.L.error.74:
 		.asciz "RPC prog. not avail"			/* 74 - EPROGUNAVAIL */
-	error.75:
+	.L.error.75:
 		.asciz "Program version wrong"		/* 75 - EPROGMISMATCH */
-	error.76:
+	.L.error.76:
 		.asciz "Bad procedure for program"		/* 76 - EPROCUNAVAIL */
 
-	error.77:
+	.L.error.77:
 		.asciz "No locks available"			/* 77 - ENOLCK */
-	error.78:
+	.L.error.78:
 		.asciz "Function not implemented"		/* 78 - ENOSYS */
-	error.79:
+	.L.error.79:
 		.asciz "Inappropriate file type or format"	/* 79 - EFTYPE */
-	error.80:
+	.L.error.80:
 		.asciz "Authentication error"			/* 80 - EAUTH */
-	error.81:
+	.L.error.81:
 		.asciz "Need authenticator"			/* 81 - ENEEDAUTH */
-	error.82:
+	.L.error.82:
 		.asciz "Identifier removed"			/* 82 - EIDRM */
-	error.83:
+	.L.error.83:
 		.asciz "No message of desired type"		/* 83 - ENOMSG */
-	error.84:
+	.L.error.84:
 		.asciz "Value too large to be stored in data type" /* 84 - EOVERFLOW */
-	error.85:
+	.L.error.85:
 		.asciz "Operation canceled"			/* 85 - ECANCELED */
-	error.86:
+	.L.error.86:
 		.asciz "Illegal byte sequence"		/* 86 - EILSEQ */
-	error.87:
+	.L.error.87:
 		.asciz "Attribute not found"			/* 87 - ENOATTR */
 	
 /* General */
-	error.88:
+	.L.error.88:
 		.asciz "Programming error"			/* 88 - EDOOFUS */
 
-	error.89:
+	.L.error.89:
 		.asciz "Bad message"				/* 89 - EBADMSG */
-	error.90:
+	.L.error.90:
 		.asciz "Multihop attempted"			/* 90 - EMULTIHOP */
-	error.91:
+	.L.error.91:
 		.asciz "Link has been severed"		/* 91 - ENOLINK */
-	error.92:
+	.L.error.92:
 		.asciz "Protocol error"			/* 92 - EPROTO */
-	error.93:
+	.L.error.93:
 		.asciz "Capabilities insufficient"		/* 93 - ENOTCAPABLE */
-	error.94:
+	.L.error.94:
 		.asciz "Not permitted in capability mode"	/* 94 - ECAPMODE */
-	error.95:
+	.L.error.95:
 		.asciz "State not recoverable"		/* 95 - ENOTRECOVERABLE */
-	error.96:
+	.L.error.96:
 		.asciz "Previous owner died"			/* 96 - EOWNERDEAD */
 
 	.globl sys_errlist
 	sys_errlist:
-		.long	error.0
-		.long	error.1
-		.long	error.2
-		.long	error.3
-		.long	error.4
-		.long	error.5
-		.long	error.6
-		.long	error.7
-		.long	error.8
-		.long	error.9
-		.long	error.10
-		.long	error.11
-		.long	error.12
-		.long	error.13
-		.long	error.14
-		.long	error.15
-		.long	error.16
-		.long	error.17
-		.long	error.18
-		.long	error.19
-		.long	error.20
-		.long	error.21
-		.long	error.22
-		.long	error.23
-		.long	error.24
-		.long	error.25
-		.long	error.26
-		.long	error.27
-		.long	error.28
-		.long	error.29
-		.long	error.30
-		.long	error.31
-		.long	error.32
-		.long	error.33
-		.long	error.34
-		.long	error.35
-		.long	error.36
-		.long	error.37
-		.long	error.38
-		.long	error.39
-		.long	error.40
-		.long	error.41
-		.long	error.42
-		.long	error.43
-		.long	error.44
-		.long	error.45
-		.long	error.46
-		.long	error.47
-		.long	error.48
-		.long	error.49
-		.long	error.50
-		.long	error.51
-		.long	error.52
-		.long	error.53
-		.long	error.54
-		.long	error.55
-		.long	error.56
-		.long	error.57
-		.long	error.58
-		.long	error.59
-		.long	error.60
-		.long	error.61
-		.long	error.62
-		.long	error.63
-		.long	error.64
-		.long	error.65
-		.long	error.66
-		.long	error.67
-		.long	error.68
-		.long	error.69
-		.long	error.70
-		.long	error.71
-		.long	error.72
-		.long	error.73
-		.long	error.74
-		.long	error.75
-		.long	error.76
-		.long	error.77
-		.long	error.78
-		.long	error.79
-		.long	error.80
-		.long	error.81
-		.long	error.82
-		.long	error.83
-		.long	error.84
-		.long	error.85
-		.long	error.86
-		.long	error.87
-		.long	error.88
-		.long	error.89
-		.long	error.90
-		.long	error.91
-		.long	error.92
-		.long	error.93
-		.long	error.94
-		.long	error.95
-		.long	error.96
+		.long	.L.error.0
+		.long	.L.error.1
+		.long	.L.error.2
+		.long	.L.error.3
+		.long	.L.error.4
+		.long	.L.error.5
+		.long	.L.error.6
+		.long	.L.error.7
+		.long	.L.error.8
+		.long	.L.error.9
+		.long	.L.error.10
+		.long	.L.error.11
+		.long	.L.error.12
+		.long	.L.error.13
+		.long	.L.error.14
+		.long	.L.error.15
+		.long	.L.error.16
+		.long	.L.error.17
+		.long	.L.error.18
+		.long	.L.error.19
+		.long	.L.error.20
+		.long	.L.error.21
+		.long	.L.error.22
+		.long	.L.error.23
+		.long	.L.error.24
+		.long	.L.error.25
+		.long	.L.error.26
+		.long	.L.error.27
+		.long	.L.error.28
+		.long	.L.error.29
+		.long	.L.error.30
+		.long	.L.error.31
+		.long	.L.error.32
+		.long	.L.error.33
+		.long	.L.error.34
+		.long	.L.error.35
+		.long	.L.error.36
+		.long	.L.error.37
+		.long	.L.error.38
+		.long	.L.error.39
+		.long	.L.error.40
+		.long	.L.error.41
+		.long	.L.error.42
+		.long	.L.error.43
+		.long	.L.error.44
+		.long	.L.error.45
+		.long	.L.error.46
+		.long	.L.error.47
+		.long	.L.error.48
+		.long	.L.error.49
+		.long	.L.error.50
+		.long	.L.error.51
+		.long	.L.error.52
+		.long	.L.error.53
+		.long	.L.error.54
+		.long	.L.error.55
+		.long	.L.error.56
+		.long	.L.error.57
+		.long	.L.error.58
+		.long	.L.error.59
+		.long	.L.error.60
+		.long	.L.error.61
+		.long	.L.error.62
+		.long	.L.error.63
+		.long	.L.error.64
+		.long	.L.error.65
+		.long	.L.error.66
+		.long	.L.error.67
+		.long	.L.error.68
+		.long	.L.error.69
+		.long	.L.error.70
+		.long	.L.error.71
+		.long	.L.error.72
+		.long	.L.error.73
+		.long	.L.error.74
+		.long	.L.error.75
+		.long	.L.error.76
+		.long	.L.error.77
+		.long	.L.error.78
+		.long	.L.error.79
+		.long	.L.error.80
+		.long	.L.error.81
+		.long	.L.error.82
+		.long	.L.error.83
+		.long	.L.error.84
+		.long	.L.error.85
+		.long	.L.error.86
+		.long	.L.error.87
+		.long	.L.error.88
+		.long	.L.error.89
+		.long	.L.error.90
+		.long	.L.error.91
+		.long	.L.error.92
+		.long	.L.error.93
+		.long	.L.error.94
+		.long	.L.error.95
+		.long	.L.error.96
 
 	.globl sys_nerr
 	sys_nerr:

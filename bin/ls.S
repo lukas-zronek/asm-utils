@@ -15,7 +15,7 @@
 .bss
 	.lcomm buffer_data, BUFFER_SIZE
 .data
-	cwd:
+	.L.cwd:
         	.asciz "."
 .text
 	.globl _start
@@ -29,15 +29,15 @@
 		pushl %eax
 
 		cmpl $2, ARGC(%ebp)
-		jl noarg
+		jl .Lnoarg
 
 		pushl ARGV(%ebp)
-		jmp open_dir
+		jmp .Lopen_dir
 
-		noarg:
-		pushl $cwd
+	.Lnoarg:
+		pushl $.L.cwd
 
-		open_dir:
+	.Lopen_dir:
 
 		call open
 		addl $8, %esp
@@ -45,7 +45,7 @@
 		movl %eax, FD(%ebp)
 
 		cmpl $-1, %eax
-		je error
+		je .Lerror
 
 		# a = &basep
 		leal BASEP(%ebp), %eax
@@ -60,16 +60,16 @@
 		movl %eax, NREAD(%ebp)
 
 		cmpl $-1, %eax
-		je error
+		je .Lerror
 
 		cmpl $0, %eax
-		je quit
+		je .Lquit
 
 		movl $0, %edi
 
-		loop:
+		.Lloop:
 			cmpl NREAD(%ebp), %edi
-			jge quit
+			jge .Lquit
 
 			/*
 			/usr/include/sys/dirent.h:
@@ -101,7 +101,7 @@
 
 			pop %edi
 
-			next:
+		.Lnext:
 		
 			# d_reclen
 			movl $buffer_data, %eax
@@ -111,18 +111,18 @@
 			movw (%eax), %bx # unsigned short/__uint16_t (2 Bytes)
 			addl %ebx, %edi
 
-			jmp loop
-		quit:
+			jmp .Lloop
+		.Lquit:
 			pushl FD(%ebp)
 			call close
 			addl $4, %esp
 
 			cmpl $-1, %eax
-			je error
+			je .Lerror
 
 			pushl $0
 			call exit
-		error:
+		.Lerror:
 			pushl ARGV(%ebp)
 			call perror
 			addl $4, %esp

@@ -31,9 +31,9 @@
 
 		movl $0, RESULT(%ebp)
 
-		loop:
+		.Lloop:
 			cmpl $0, %edi
-			je quit
+			je .Lquit
 
 			decl %edi
 
@@ -43,15 +43,15 @@
 
 			# '-' ... 45
 			cmpb $45, %bl
-			je negative
+			je .Lnegative
 
 			# '0' ... 48
 			cmpb $48, %bl
-			jl quit
+			jl .Lquit
 
 			# '9' ... 57
 			cmpb $57, %bl
-			jg quit
+			jg .Lquit
 
 			subb $48, %bl
 
@@ -77,13 +77,13 @@
 
 			incl %ecx
 
-			jmp loop
-		quit:
+			jmp .Lloop
+		.Lquit:
 			movl RESULT(%ebp), %eax
 
 			movl %ebp, %esp
 			popl %ebp
 			ret
-		negative:
+		.Lnegative:
 			negl RESULT(%ebp)
-			jmp quit
+			jmp .Lquit

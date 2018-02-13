@@ -13,38 +13,38 @@
 		movl $1, %edi
 
 		cmpl $1, ARGC(%ebp)
-		jg loop
+		jg .Lloop
 
 		pushl $0
-		call cat
+		call .Lcat
 		addl $4, %esp
 	
 		cmpl $1, %eax
-		je error
-		jmp quit
+		je .Lerror
+		jmp .Lquit
 
-		loop:
+		.Lloop:
 			cmpl ARGC(%ebp), %edi
-			jge quit
+			jge .Lquit
 
 			pushl %edi
 
 			pushl ARGV(%ebp, %edi, 4)
-			call cat
+			call .Lcat
 			addl $4, %esp
 
 			popl %edi
 
 			cmpl $EXIT_FAILURE, %eax
-			je error
+			je .Lerror
 
 			incl %edi
 
-			jmp loop
-		error:
+			jmp .Lloop
+		.Lerror:
 			pushl $EXIT_FAILURE
 			call exit
-		quit:
+		.Lquit:
 			pushl $EXIT_SUCCESS
 			call exit
 #define BUFFER_SIZE 1024
@@ -52,7 +52,7 @@
 #define FD -4
 #define RETURN -8
 #define BUFFER -1032
-	cat:
+	.Lcat:
 		pushl %ebp
 		movl %esp, %ebp
 
@@ -62,7 +62,7 @@
 
 		movl $STDIN_FILENO, FD(%ebp)
 		cmpl $0, FILENAME(%ebp)
-		je cat_loop_start
+		je .Lcat_loop_start
 
 		pushl $0
 		pushl $O_RDONLY
@@ -71,11 +71,11 @@
 		addl $12, %esp
 
 		cmpl $-1, %eax
-		je cat_error
+		je .Lcat_error
 
 		movl %eax, FD(%ebp)
 
-		cat_loop_start:
+		.Lcat_loop_start:
         		leal BUFFER(%ebp), %eax
 			pushl $BUFFER_SIZE
 			pushl %eax
@@ -84,8 +84,8 @@
 			addl $12, %esp
 
 			cmpl $0, %eax
-			je cat_loop_end
-			jl cat_error
+			je .Lcat_loop_end
+			jl .Lcat_error
 
 			pushl %eax
         		leal BUFFER(%ebp), %eax
@@ -95,32 +95,32 @@
 			addl $12, %esp
 
 			cmpl $-1, %eax
-			je cat_error
+			je .Lcat_error
 
-			jmp cat_loop_start
-		cat_error:
+			jmp .Lcat_loop_start
+		.Lcat_error:
 			movl $EXIT_FAILURE, RETURN(%ebp)
 
 			pushl FILENAME(%ebp)
 			call perror
 			addl $4, %esp
-		cat_loop_end:
+		.Lcat_loop_end:
 			cmpl $STDIN_FILENO, FD(%ebp)
-			jle cat_return
+			jle .Lcat_return
 
 			pushl FD(%ebp)
 			call close
 			addl $4, %esp
 
 			cmpl $0, %eax
-			je cat_return
+			je .Lcat_return
 
 			movl $EXIT_FAILURE, RETURN(%ebp)
 
 			pushl FILENAME(%ebp)
 			call perror
 			addl $4, %esp
-		cat_return:
+		.Lcat_return:
 			movl RETURN(%ebp), %eax
 			movl %ebp, %esp
 			popl %ebp

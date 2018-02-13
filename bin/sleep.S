@@ -7,7 +7,7 @@
 #define EXIT_FAILURE 1
 
 .data
-	usage:
+	.L.usage:
 		.asciz "usage: sleep seconds"
 .text
 	.globl _start
@@ -15,36 +15,36 @@
 		movl %esp, %ebp
 
 		cmpl $2, ARGC(%ebp)
-		jne print_usage
+		jne .Lprint_usage
 
 		pushl SECONDS(%ebp)
 		call atoi
 		addl $4, %esp
 
 		cmpl $0, %eax
-		jl error
+		jl .Lerror
 
 		pushl %eax
 		call sleep
 		addl $4, %esp
 
 		cmpl $-1, %eax
-		jne quit
+		jne .Lquit
 
 		pushl ARGV(%ebp)
 		call perror
 		addl $4, %esp
 
-		jmp error
+		jmp .Lerror
 
-		quit:
+		.Lquit:
 			pushl $EXIT_SUCCESS
 			call exit
-		print_usage:
-			push $usage
+		.Lprint_usage:
+			push $.L.usage
 			push $STDERR_FILENO
 			call fputs
 			addl $8, %esp
-		error:
+		.Lerror:
 			pushl $EXIT_FAILURE
 			call exit

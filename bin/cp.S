@@ -1,7 +1,7 @@
 #include <io.h>
 
 .data
-	usage:
+	.L.usage:
 		.asciz "usage: cp source_file target_file"
 .text
 #define BUFFER_SIZE 1024
@@ -17,7 +17,7 @@
 		subl $-BUFFER, %esp
 
 		cmpl $3, (%ebp)
-		jl print_usage
+		jl .Lprint_usage
 
 		pushl $0
 		pushl $O_RDONLY
@@ -26,7 +26,7 @@
 		addl $12, %esp
 
 		cmpl $-1, %eax
-		je error
+		je .Lerror
 
 		movl %eax, FD_SRC(%ebp)
 
@@ -43,9 +43,9 @@
 		movl %eax, FD_DEST(%ebp)
 
 		cmpl $-1, %eax
-		je error
+		je .Lerror
 
-		loop_start:
+		.Lloop_start:
         		leal BUFFER(%ebp), %ebx
 			pushl $BUFFER_SIZE
 			pushl %ebx
@@ -54,10 +54,10 @@
 			addl $12, %esp
 
 			cmpl $-1, %eax
-			je error
+			je .Lerror
 
 			cmpl $0, %eax
-			jle loop_end
+			jle .Lloop_end
 
 			movl FD_DEST(%ebp), %ecx
 			
@@ -69,10 +69,10 @@
 			addl $12, %esp
 
 			cmpl $-1, %eax
-			je error
+			je .Lerror
 
-			jmp loop_start
-		loop_end:
+			jmp .Lloop_start
+		.Lloop_end:
 			pushl FD_SRC(%ebp)
 			call close
 			addl $4, %esp
@@ -81,22 +81,22 @@
 			call close
 			addl $4, %esp
 
-			jmp quit
-		error:
+			jmp .Lquit
+		.Lerror:
 			pushl 4(%ebp)
 			call perror
 			addl $4, %esp
 
 			pushl $1
 			call exit
-		print_usage:
-			push $usage
+		.Lprint_usage:
+			push $.L.usage
 			push $STDERR_FILENO
 			call fputs
 			addl $8, %esp
 
 			pushl $1
 			call exit
-		quit:
+		.Lquit:
 			pushl $0
 			call exit

@@ -8,7 +8,7 @@
 		movl %esp, %ebp
 
 		cmpl $2, ARGC(%ebp)
-		jne error
+		jne .Lerror
 
 		pushl $0755
 		pushl DIR(%ebp)
@@ -16,14 +16,14 @@
 		addl $8, %esp
 
 		cmpl $0, %eax
-		jl mkdir_error
+		jl .Lmkdir_error
 
 		pushl $0
 		call exit
-	mkdir_error:
+	.Lmkdir_error:
 		pushl DIR(%ebp)
 		call perror
 		addl $4, %esp
-	error:
+	.Lerror:
 		pushl $1
 		call exit

@@ -12,14 +12,14 @@
 		movl $0, %edi
 		movl STRING(%ebp), %edx
 
-		loop:
+		.Lloop:
 			movb (%edx, %edi, 1), %al
 			cmpb $0, %al
-			je return
+			je .Lreturn
 			incl %edi
-			jmp loop
+			jmp .Lloop
 
-		return:
+		.Lreturn:
 			movl %edi, %eax
 
 			movl %ebp, %esp
