@@ -7,18 +7,14 @@
 		addl (%ebp), %edi
 
 		.Lloop:
-			movl (%ebp, %edi, 4), %eax
+			movl (%ebp, %edi, 4), %ebx
 
-			cmpl $0, %eax
+			cmpl $0, %ebx
 			je .Lquit
 
-			pushl %edi
-			pushl %eax
-			pushl %eax
+			pushl %ebx
 			call puts
 			addl $4, %esp
-			popl %eax
-			popl %edi
 
 			incl %edi
 

@@ -13,11 +13,9 @@
 			cmpl $0, (%ebx)
 			je .Lquit
 
-			pushl %ebx
 			pushl (%ebx)
 			call puts
 			addl $4, %esp
-			popl %ebx
 
 			jmp .Lloop
 		.Lquit:

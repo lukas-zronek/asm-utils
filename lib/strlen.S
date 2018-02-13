@@ -9,6 +9,9 @@
 		pushl %ebp
 		movl %esp, %ebp
 
+		pushl %edi
+		pushl %edx
+
 		movl $0, %edi
 		movl STRING(%ebp), %edx
 
@@ -21,6 +24,9 @@
 
 		.Lreturn:
 			movl %edi, %eax
+
+			popl %edx
+			popl %edi
 
 			movl %ebp, %esp
 			popl %ebp

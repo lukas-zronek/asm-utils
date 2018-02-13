@@ -27,13 +27,9 @@
 			cmpl ARGC(%ebp), %edi
 			jge .Lquit
 
-			pushl %edi
-
 			pushl ARGV(%ebp, %edi, 4)
 			call .Lcat
 			addl $4, %esp
-
-			popl %edi
 
 			cmpl $EXIT_FAILURE, %eax
 			je .Lerror
@@ -57,6 +53,8 @@
 		movl %esp, %ebp
 
 		subl $-BUFFER, %esp
+
+		pushl %edi
 
 		movl $EXIT_SUCCESS, RETURN(%ebp)
 
@@ -121,6 +119,8 @@
 			call perror
 			addl $4, %esp
 		.Lcat_return:
+			popl %edi
+
 			movl RETURN(%ebp), %eax
 			movl %ebp, %esp
 			popl %ebp

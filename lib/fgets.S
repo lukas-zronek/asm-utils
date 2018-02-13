@@ -10,6 +10,8 @@
 		pushl %ebp
 		movl %esp, %ebp
 
+		pushl %ebx
+
 		pushl SIZE(%ebp)
 		pushl STRING(%ebp)
 		pushl $STDIN_FILENO
@@ -28,6 +30,8 @@
 		movb $0, (%ebx, %eax, 1)
 
 		popl %eax
+
+		popl %ebx
 
 		movl %ebp, %esp
 		popl %ebp

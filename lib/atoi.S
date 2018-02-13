@@ -21,6 +21,10 @@
 
 		subl $4, %esp
 
+		pushl %edi
+		pushl %ebx
+		pushl %ecx
+
 		pushl NPTR(%ebp)
 		call strlen
 		addl $4, %esp
@@ -55,18 +59,10 @@
 
 			subb $48, %bl
 
-			pushl %ebx
-			pushl %ecx
-			pushl %edi
-
 			pushl %ecx
 			pushl $10
 			call pow
 			addl $8, %esp
-
-			popl %edi
-			popl %ecx
-			popl %ebx
 
 			# %eax = %ebx * %eax
 			mull %ebx
@@ -80,6 +76,10 @@
 			jmp .Lloop
 		.Lquit:
 			movl RESULT(%ebp), %eax
+
+			popl %ecx
+			popl %ebx
+			popl %edi
 
 			movl %ebp, %esp
 			popl %ebp

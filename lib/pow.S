@@ -8,9 +8,12 @@
 		pushl %ebp
 		movl %esp, %ebp
 
+		pushl %edi
+		pushl %ebx
+
 		movl $1, %eax
-		movl BASE(%esp), %ebx
-		movl POWER(%esp), %edi
+		movl BASE(%ebp), %ebx
+		movl POWER(%ebp), %edi
 
 		.Lloop:
 			cmpl $0, %edi
@@ -22,6 +25,9 @@
 
 			jmp .Lloop
 		.Lquit: 
+			popl %ebx
+			popl %edi
+
 			movl %ebp, %esp
 			popl %ebp
 			ret

@@ -17,21 +17,17 @@
 		cmpl (%ebp), %edi
 		jg .Lloop_exit
 
-		pushl %edi
 		pushl (%ebp, %edi, 4)
 		pushl $STDOUT_FILENO
 		call fprint
 		addl $8, %esp
-		popl %edi
 
 		incl %edi
 
-		pushl %edi
 		pushl $.L.space
 		pushl $STDOUT_FILENO
 		call fprint
 		addl $8, %esp
-		popl %edi
 
 		jmp .Lloop_start
 	.Lloop_exit:
