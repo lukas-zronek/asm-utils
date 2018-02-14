@@ -3,7 +3,7 @@ CFLAGS := -m32 -nostdinc -Wall
 LDFLAGS := -m32 -nostdlib
 EXEC := $(patsubst %.S,%,$(wildcard *.S))
 LIB_NAME := sys
-LIB_DIR := ../lib
+LIB_DIR := $(shell realpath ../lib)
 INC := $(LIB_DIR)/inc
 
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< -l$(LIB_NAME)
