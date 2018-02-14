@@ -7,3 +7,4 @@
 136 mkdir
 196 getdirentries
 240 nanosleep
+326 getcwd
