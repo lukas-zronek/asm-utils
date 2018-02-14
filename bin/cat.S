@@ -1,9 +1,5 @@
+#include <std.h>
 #include <io.h>
-
-#define ARGC 0
-#define ARGV 4
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
 
 .text
 	.globl _start

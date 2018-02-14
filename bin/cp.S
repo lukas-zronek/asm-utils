@@ -1,3 +1,4 @@
+#include <std.h>
 #include <io.h>
 
 .data
@@ -87,7 +88,7 @@
 			call perror
 			addl $4, %esp
 
-			pushl $1
+			pushl $EXIT_FAILURE
 			call exit
 		.Lprint_usage:
 			push $.L.usage
@@ -95,8 +96,8 @@
 			call fputs
 			addl $8, %esp
 
-			pushl $1
+			pushl $EXIT_FAILURE
 			call exit
 		.Lquit:
-			pushl $0
+			pushl $EXIT_SUCCESS
 			call exit

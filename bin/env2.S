@@ -1,3 +1,4 @@
+#include <std.h>
 .text
 	.globl _start
 	_start:
@@ -20,5 +21,5 @@
 
 			jmp .Lloop
 		.Lquit:
-			pushl $0
+			pushl $EXIT_SUCCESS
 			call exit

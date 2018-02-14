@@ -1,8 +1,7 @@
+#include <std.h>
 #include <io.h>
 
 #define BUFFER_SIZE 1024
-#define ARGC 0
-#define ARGV 8
 #define FD -4
 #define BASEP -8
 #define NREAD -12
@@ -31,7 +30,8 @@
 		cmpl $2, ARGC(%ebp)
 		jl .Lnoarg
 
-		pushl ARGV(%ebp)
+		movl $1, %eax
+		pushl ARGV(%ebp, %eax, 4)
 		jmp .Lopen_dir
 
 	.Lnoarg:
@@ -120,12 +120,13 @@
 			cmpl $-1, %eax
 			je .Lerror
 
-			pushl $0
+			pushl $EXIT_SUCCESS
 			call exit
 		.Lerror:
-			pushl ARGV(%ebp)
+			movl $1, %eax
+			pushl ARGV(%ebp, %eax, 4)
 			call perror
 			addl $4, %esp
 
-			pushl $1
+			pushl $EXIT_FAILURE
 			call exit

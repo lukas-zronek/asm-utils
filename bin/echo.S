@@ -1,3 +1,4 @@
+#include <std.h>
 #include <io.h>
 .data
 	.L.newline:
@@ -36,5 +37,5 @@
 		call fprint
 		addl $8, %esp
 	.Lquit:
-		pushl $0
+		pushl $EXIT_SUCCESS
 		call exit

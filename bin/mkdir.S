@@ -1,5 +1,4 @@
-#define ARGC 0
-#define ARGV 4
+#include <std.h>
 #define DIR 8
 
 .text
@@ -18,12 +17,12 @@
 		cmpl $0, %eax
 		jl .Lmkdir_error
 
-		pushl $0
+		pushl $EXIT_SUCCESS
 		call exit
 	.Lmkdir_error:
 		pushl DIR(%ebp)
 		call perror
 		addl $4, %esp
 	.Lerror:
-		pushl $1
+		pushl $EXIT_FAILURE
 		call exit
