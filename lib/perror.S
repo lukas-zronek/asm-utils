@@ -5,8 +5,8 @@
 #define STRING 8
 
 .data
-	.L.seperator:
-		.asciz ": "
+	.L.format:
+		.asciz "%s: %s\n"
 .text
 	.globl perror
 	.type perror, @function
@@ -14,24 +14,15 @@
 		pushl %ebp
 		movl %esp, %ebp
 
-		pushl STRING(%ebp)
-		pushl $STDERR_FILENO
-		call fprint
-		addl $8, %esp
-
-		pushl $.L.seperator
-		pushl $STDERR_FILENO
-		call fprint
-		addl $8, %esp
-
 		pushl _errno
 		call strerror
 		addl $4, %esp
 
 		pushl %eax
+		pushl STRING(%ebp)
+		pushl $.L.format
 		pushl $STDERR_FILENO
-		call fputs
-		addl $8, %esp
+		call fprintf
 
 		movl %ebp, %esp
 		popl %ebp
