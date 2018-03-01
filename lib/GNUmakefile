@@ -1,7 +1,7 @@
 CC := clang
 AR := ar
 CFLAGS := -m32 -nostdinc -Wall
-LDFLAGS := -m32 -nostdlib -Wl,-shared
+LDFLAGS := -m32 -nostdlib -Wl,-shared -Wl,--no-undefined
 OBJS := syscalls.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o sleep.o strlen.o
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
