@@ -7,7 +7,7 @@ LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
 INC := inc
-SYSCALLS_LIST=syscalls.list
+SYSCALLS_LIST := syscalls.list
 
 all: $(LIB_AR) $(LIB_SO)
 
