@@ -9,3 +9,4 @@ false
 echo
 true
 sleep
+pwd
