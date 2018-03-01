@@ -3,7 +3,7 @@
 
 #define SECONDS 8
 
-.data
+.rodata
 	.L.usage:
 		.asciz "usage: sleep seconds"
 .text

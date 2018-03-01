@@ -3,7 +3,7 @@
 
 #define DIR 8
 
-.data
+.rodata
 	.L.usage:
 		.asciz "usage: mkdir directory_name"
 .text

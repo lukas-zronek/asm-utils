@@ -1,7 +1,7 @@
 #include <std.h>
 #include <io.h>
 
-.data
+.rodata
 	.L.usage:
 		.asciz "usage: cp source_file target_file"
 .text

@@ -1,6 +1,6 @@
 #include <std.h>
 #include <io.h>
-.data
+.rodata
 	.L.newline:
 		.asciz "\n"
 	.L.space:

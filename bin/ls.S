@@ -13,7 +13,7 @@
 
 .bss
 	.lcomm buffer_data, BUFFER_SIZE
-.data
+.rodata
 	.L.cwd:
         	.asciz "."
 .text

@@ -4,7 +4,7 @@
 #define SRC 8
 #define DEST 12
 
-.data
+.rodata
 	.L.usage:
 		.asciz "usage: mv source target"
 .text

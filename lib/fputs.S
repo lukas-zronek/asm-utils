@@ -1,7 +1,7 @@
 #define FD 8
 #define STRING 12
 
-.data
+.rodata
 	.L.newline:
 		.asciz "\n"
 .text

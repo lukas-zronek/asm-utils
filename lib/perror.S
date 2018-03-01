@@ -4,7 +4,7 @@
 
 #define STRING 8
 
-.data
+.rodata
 	.L.format:
 		.asciz "%s: %s\n"
 .text

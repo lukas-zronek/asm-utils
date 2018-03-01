@@ -30,7 +30,7 @@
 
 # extern const char * const sys_errlist[];
 # extern const int sys_nerr;
-.data
+.rodata
 	.L.error.0:
 		.asciz "No error: 0"				/*  0 - ENOERROR */
 	.L.error.1:
