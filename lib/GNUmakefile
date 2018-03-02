@@ -1,12 +1,12 @@
 CC := clang
 AR := ar
-CFLAGS := -m32 -nostdinc -Wall
+INC := inc
+CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS := -m32 -nostdlib -Wl,-shared -Wl,--no-undefined
 OBJS := syscalls.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o sleep.o strlen.o
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
-INC := inc
 SYSCALLS_LIST := syscalls.list
 
 all: $(LIB_AR) $(LIB_SO)
