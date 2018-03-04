@@ -8,8 +8,14 @@ LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
 SYSCALLS_LIST := syscalls.list
+UNAME := $(shell uname -s)
 
+ifeq ($(UNAME),Darwin)
+SYSCALLS_LIST := syscalls.darwin.list
+all: $(LIB_AR)
+else
 all: $(LIB_AR) $(LIB_SO)
+endif
 
 syscalls.S: syscalls.S.head syscalls.S.stub $(SYSCALLS_LIST)
 	./makesyscalls.sh $(SYSCALLS_LIST)

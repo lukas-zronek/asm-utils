@@ -1,15 +1,26 @@
 CC := clang
-CFLAGS := -m32 -nostdinc -Wall
+LIB_DIR := $(realpath ../lib)
+INC := $(LIB_DIR)/inc
+CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS := -m32 -nostdlib
 EXEC := $(patsubst %.S,%,$(wildcard *.S))
 LIB_NAME := sys
-LIB_DIR := $(realpath ../lib)
-INC := $(LIB_DIR)/inc
+UNAME := $(shell uname -s)
 
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< -l$(LIB_NAME)
 LDFLAGS_DYNAMIC = -dynamic -rpath $(LIB_DIR) -L$(LIB_DIR) -Wl,-as-needed -o $@ $< -l$(LIB_NAME)
 
-all: dynamic
+ifeq ($(UNAME),Darwin)
+ifeq ($(MAKECMDGOALS),dynamic)
+$(error dynamic target is not supported on macOS)
+endif
+DEFAULT_TARGET := static
+LDFLAGS += -Wl,-e,_start
+else
+DEFAULT_TARGET := dynamic
+endif
+
+all: $(DEFAULT_TARGET)
 
 static: LDFLAGS += $(LDFLAGS_STATIC)
 static: $(EXEC)
