@@ -7,18 +7,17 @@
 		imull $4, %eax
 		addl %eax, %ebx
 		addl $4, %ebx
+	.Lloop:
+		addl $4, %ebx
 
-		.Lloop:
-			addl $4, %ebx
+		cmpl $0, (%ebx)
+		je .Lquit
 
-			cmpl $0, (%ebx)
-			je .Lquit
+		pushl (%ebx)
+		call puts
+		addl $4, %esp
 
-			pushl (%ebx)
-			call puts
-			addl $4, %esp
-
-			jmp .Lloop
-		.Lquit:
-			pushl $EXIT_SUCCESS
-			call exit
+		jmp .Lloop
+	.Lquit:
+		pushl $EXIT_SUCCESS
+		call exit

@@ -33,15 +33,14 @@
 		addl $4, %esp
 
 		jmp .Lerror
-
-		.Lquit:
-			pushl $EXIT_SUCCESS
-			call exit
-		.Lprint_usage:
-			push $.L.usage
-			push $STDERR_FILENO
-			call fputs
-			addl $8, %esp
-		.Lerror:
-			pushl $EXIT_FAILURE
-			call exit
+	.Lquit:
+		pushl $EXIT_SUCCESS
+		call exit
+	.Lprint_usage:
+		push $.L.usage
+		push $STDERR_FILENO
+		call fputs
+		addl $8, %esp
+	.Lerror:
+		pushl $EXIT_FAILURE
+		call exit

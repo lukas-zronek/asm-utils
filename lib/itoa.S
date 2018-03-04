@@ -33,38 +33,38 @@
 		movl BUFFER(%ebp), %eax
 		movl $0, (%eax, %edi, 1)
 
-		.Lloop:
-			/* %eax / 10 = %eax; %eax % 10 = %edx */
-			xorl %edx, %edx
-			movl VALUE(%ebp), %eax
-			movl $10, %ebx
-			divl %ebx
-			movl %eax, VALUE(%ebp)
+	.Lloop:
+		/* %eax / 10 = %eax; %eax % 10 = %edx */
+		xorl %edx, %edx
+		movl VALUE(%ebp), %eax
+		movl $10, %ebx
+		divl %ebx
+		movl %eax, VALUE(%ebp)
 
-			addl $ASCII_ZERO, %edx
+		addl $ASCII_ZERO, %edx
 
-			decl %edi
-			movl BUFFER(%ebp), %eax
-			movb %dl, (%eax, %edi, 1)
+		decl %edi
+		movl BUFFER(%ebp), %eax
+		movb %dl, (%eax, %edi, 1)
 
-			cmpl $0, VALUE(%ebp)
-			je .Lreturn
+		cmpl $0, VALUE(%ebp)
+		je .Lreturn
 
-			cmpl $0, %edi
-			je .Lerror /* buffer to small */
+		cmpl $0, %edi
+		je .Lerror /* buffer to small */
 
-			jmp .Lloop
-		.Lreturn:
-			movl BUFFER(%ebp), %eax
-			leal (%eax, %edi, 1), %eax
-		.Lquit:
-			popl %edi
-			popl %edx
-			popl %ebx
+		jmp .Lloop
+	.Lreturn:
+		movl BUFFER(%ebp), %eax
+		leal (%eax, %edi, 1), %eax
+	.Lquit:
+		popl %edi
+		popl %edx
+		popl %ebx
 
-			movl %ebp, %esp
-			popl %ebp
-			ret
-		.Lerror:
-			xorl %eax, %eax
-			jmp .Lquit
+		movl %ebp, %esp
+		popl %ebp
+		ret
+	.Lerror:
+		xorl %eax, %eax
+		jmp .Lquit

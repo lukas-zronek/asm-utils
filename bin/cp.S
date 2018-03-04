@@ -45,59 +45,58 @@
 
 		cmpl $-1, %eax
 		je .Lerror
+	.Lloop_start:
+		leal BUFFER(%ebp), %ebx
+		pushl $BUFFER_SIZE
+		pushl %ebx
+		pushl FD_SRC(%ebp)
+		call read
+		addl $12, %esp
 
-		.Lloop_start:
-        		leal BUFFER(%ebp), %ebx
-			pushl $BUFFER_SIZE
-			pushl %ebx
-			pushl FD_SRC(%ebp)
-			call read
-			addl $12, %esp
+		cmpl $-1, %eax
+		je .Lerror
 
-			cmpl $-1, %eax
-			je .Lerror
+		cmpl $0, %eax
+		jle .Lloop_end
 
-			cmpl $0, %eax
-			jle .Lloop_end
-
-			movl FD_DEST(%ebp), %ecx
+		movl FD_DEST(%ebp), %ecx
 			
-        		leal BUFFER(%ebp), %ebx
-			pushl %eax
-			pushl %ebx
-			pushl %ecx
-			call write
-			addl $12, %esp
+		leal BUFFER(%ebp), %ebx
+		pushl %eax
+		pushl %ebx
+		pushl %ecx
+		call write
+		addl $12, %esp
 
-			cmpl $-1, %eax
-			je .Lerror
+		cmpl $-1, %eax
+		je .Lerror
 
-			jmp .Lloop_start
-		.Lloop_end:
-			pushl FD_SRC(%ebp)
-			call close
-			addl $4, %esp
+		jmp .Lloop_start
+	.Lloop_end:
+		pushl FD_SRC(%ebp)
+		call close
+		addl $4, %esp
 
-			pushl FD_DEST(%ebp)
-			call close
-			addl $4, %esp
+		pushl FD_DEST(%ebp)
+		call close
+		addl $4, %esp
 
-			jmp .Lquit
-		.Lerror:
-			pushl 4(%ebp)
-			call perror
-			addl $4, %esp
+		jmp .Lquit
+	.Lerror:
+		pushl 4(%ebp)
+		call perror
+		addl $4, %esp
 
-			pushl $EXIT_FAILURE
-			call exit
-		.Lprint_usage:
-			push $.L.usage
-			push $STDERR_FILENO
-			call fputs
-			addl $8, %esp
+		pushl $EXIT_FAILURE
+		call exit
+	.Lprint_usage:
+		push $.L.usage
+		push $STDERR_FILENO
+		call fputs
+		addl $8, %esp
 
-			pushl $EXIT_FAILURE
-			call exit
-		.Lquit:
-			pushl $EXIT_SUCCESS
-			call exit
+		pushl $EXIT_FAILURE
+		call exit
+	.Lquit:
+		pushl $EXIT_SUCCESS
+		call exit

@@ -34,56 +34,55 @@
 		movl $0, %ecx
 
 		movl $0, RESULT(%ebp)
+	.Lloop:
+		cmpl $0, %edi
+		je .Lquit
 
-		.Lloop:
-			cmpl $0, %edi
-			je .Lquit
+		decl %edi
 
-			decl %edi
+		xorl %ebx, %ebx
+		movl NPTR(%ebp), %eax
+		movb (%eax, %edi, 1), %bl
 
-			xorl %ebx, %ebx
-			movl NPTR(%ebp), %eax
-			movb (%eax, %edi, 1), %bl
+		# '-' ... 45
+		cmpb $45, %bl
+		je .Lnegative
 
-			# '-' ... 45
-			cmpb $45, %bl
-			je .Lnegative
+		# '0' ... 48
+		cmpb $48, %bl
+		jl .Lquit
 
-			# '0' ... 48
-			cmpb $48, %bl
-			jl .Lquit
+		# '9' ... 57
+		cmpb $57, %bl
+		jg .Lquit
 
-			# '9' ... 57
-			cmpb $57, %bl
-			jg .Lquit
+		subb $48, %bl
 
-			subb $48, %bl
+		pushl %ecx
+		pushl $10
+		call pow
+		addl $8, %esp
 
-			pushl %ecx
-			pushl $10
-			call pow
-			addl $8, %esp
+		# %eax = %ebx * %eax
+		mull %ebx
 
-			# %eax = %ebx * %eax
-			mull %ebx
+		movl RESULT(%ebp), %ebx
+		addl %ebx, %eax
+		movl %eax, RESULT(%ebp)
 
-			movl RESULT(%ebp), %ebx
-			addl %ebx, %eax
-			movl %eax, RESULT(%ebp)
+		incl %ecx
 
-			incl %ecx
+		jmp .Lloop
+	.Lquit:
+		movl RESULT(%ebp), %eax
 
-			jmp .Lloop
-		.Lquit:
-			movl RESULT(%ebp), %eax
+		popl %ecx
+		popl %ebx
+		popl %edi
 
-			popl %ecx
-			popl %ebx
-			popl %edi
-
-			movl %ebp, %esp
-			popl %ebp
-			ret
-		.Lnegative:
-			negl RESULT(%ebp)
-			jmp .Lquit
+		movl %ebp, %esp
+		popl %ebp
+		ret
+	.Lnegative:
+		negl RESULT(%ebp)
+		jmp .Lquit

@@ -14,20 +14,18 @@
 
 		movl $0, %edi
 		movl STRING(%ebp), %edx
+	.Lloop:
+		movb (%edx, %edi, 1), %al
+		cmpb $0, %al
+		je .Lreturn
+		incl %edi
+		jmp .Lloop
+	.Lreturn:
+		movl %edi, %eax
 
-		.Lloop:
-			movb (%edx, %edi, 1), %al
-			cmpb $0, %al
-			je .Lreturn
-			incl %edi
-			jmp .Lloop
+		popl %edx
+		popl %edi
 
-		.Lreturn:
-			movl %edi, %eax
-
-			popl %edx
-			popl %edi
-
-			movl %ebp, %esp
-			popl %ebp
-			ret
+		movl %ebp, %esp
+		popl %ebp
+		ret

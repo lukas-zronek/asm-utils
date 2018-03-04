@@ -14,20 +14,19 @@
 		movl $1, %eax
 		movl BASE(%ebp), %ebx
 		movl POWER(%ebp), %edi
+	.Lloop:
+		cmpl $0, %edi
+		je .Lquit
 
-		.Lloop:
-			cmpl $0, %edi
-			je .Lquit
+		mull %ebx
 
-			mull %ebx
+		decl %edi
 
-			decl %edi
+		jmp .Lloop
+	.Lquit: 
+		popl %ebx
+		popl %edi
 
-			jmp .Lloop
-		.Lquit: 
-			popl %ebx
-			popl %edi
-
-			movl %ebp, %esp
-			popl %ebp
-			ret
+		movl %ebp, %esp
+		popl %ebp
+		ret
