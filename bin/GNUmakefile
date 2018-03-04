@@ -14,7 +14,7 @@ ifeq ($(UNAME),Darwin)
 ifeq ($(MAKECMDGOALS),dynamic)
 $(error dynamic target is not supported on macOS)
 endif
-DEFAULT_TARGET := static
+DEFAULT_TARGET := static strip
 LDFLAGS += -Wl,-e,_start
 else
 DEFAULT_TARGET := dynamic
@@ -34,7 +34,10 @@ $(EXEC): %: %.o
 %.o: %.S
 	$(CC) $(CFLAGS) -I $(INC) -c $<
 
+strip:
+	strip -x $(EXEC)
+
 clean:
 	rm -f *.o $(EXEC)
 
-.PHONY: all clean static dynamic
+.PHONY: all clean static dynamic strip
