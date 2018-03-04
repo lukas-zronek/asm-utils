@@ -3,6 +3,7 @@
 4 write
 5 open
 6 close
+93 select
 128 rename
 136 mkdir
 196 getdirentries
