@@ -34,10 +34,10 @@
 		jmp .Lloop
 	.Lerror:
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
 #define BUFFER_SIZE 1024
 #define FILENAME 8
 #define FD -4
@@ -60,7 +60,7 @@
 		pushl $0
 		pushl $O_RDONLY
 		pushl FILENAME(%ebp)
-		call open
+		call syscall_open
 		addl $12, %esp
 
 		cmpl $-1, %eax
@@ -72,7 +72,7 @@
 		pushl $BUFFER_SIZE
 		pushl %eax
 		pushl FD(%ebp)
-		call read
+		call syscall_read
 		addl $12, %esp
 
 		cmpl $0, %eax
@@ -83,7 +83,7 @@
 		leal BUFFER(%ebp), %eax
 		pushl %eax
 		pushl $1
-		call write
+		call syscall_write
 		addl $12, %esp
 
 		cmpl $-1, %eax
@@ -101,7 +101,7 @@
 		jle .Lcat_return
 
 		pushl FD(%ebp)
-		call close
+		call syscall_close
 		addl $4, %esp
 
 		cmpl $0, %eax

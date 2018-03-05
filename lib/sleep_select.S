@@ -31,7 +31,7 @@
 		pushl $0
 		pushl $0
 		pushl $0
-		call select
+		call syscall_select
 		addl $20, %esp
 
 		movl %ebp, %esp

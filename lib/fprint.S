@@ -15,7 +15,7 @@
 		pushl %eax
 		pushl STRING(%ebp)
 		pushl FD(%ebp)
-		call write
+		call syscall_write
 		addl $12, %esp
 
 		movl %ebp, %esp

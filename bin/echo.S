@@ -38,4 +38,4 @@
 		addl $8, %esp
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit

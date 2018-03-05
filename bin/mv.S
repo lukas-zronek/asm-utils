@@ -17,21 +17,21 @@
 
 		pushl DEST(%ebp)
 		pushl SRC(%ebp)
-		call rename
+		call syscall_rename
 		addl $8, %esp
 
 		cmpl $0, %eax
 		jl .Lrename_error
 
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
 	.Lrename_error:
 		pushl ARGV(%ebp)
 		call perror
 		addl $4, %esp
 	.Lerror:
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO

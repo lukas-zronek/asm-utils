@@ -35,7 +35,7 @@
 		jmp .Lerror
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
@@ -43,4 +43,4 @@
 		addl $8, %esp
 	.Lerror:
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit

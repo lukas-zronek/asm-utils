@@ -35,7 +35,7 @@
 
 		pushl $0
 		pushl %eax
-		call nanosleep
+		call syscall_nanosleep
 		addl $8, %esp
 
 		movl %ebp, %esp

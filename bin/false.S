@@ -2,4 +2,4 @@
 	.globl _start
 	_start:
 		pushl $1
-		call exit
+		call syscall_exit

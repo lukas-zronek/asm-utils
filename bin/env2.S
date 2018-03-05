@@ -21,4 +21,4 @@
 		jmp .Lloop
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit

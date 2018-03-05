@@ -14,6 +14,7 @@ src=
 
 while read -r nr name
 do
+	name=syscall_$name
 	src="$src $name.S"
 	sed -e s/{NR}/"$nr"/ -e s/{NAME}/"$name"/ "$in" > "$name".S
 done < "$list"

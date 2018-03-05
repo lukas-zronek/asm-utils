@@ -90,7 +90,7 @@
 			pushl $1
 			pushl %eax
 			pushl FD(%ebp)
-			call write
+			call syscall_write
 			addl $12, %esp
 
 			cmpl $1, %eax

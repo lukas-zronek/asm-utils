@@ -16,21 +16,21 @@
 
 		pushl $0755
 		pushl DIR(%ebp)
-		call mkdir
+		call syscall_mkdir
 		addl $8, %esp
 
 		cmpl $0, %eax
 		jl .Lmkdir_error
 
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
 	.Lmkdir_error:
 		pushl DIR(%ebp)
 		call perror
 		addl $4, %esp
 	.Lerror:
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO

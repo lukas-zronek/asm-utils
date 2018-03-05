@@ -33,6 +33,6 @@ $(LIB_SO): syscalls.d $(OBJS)
 	$(CC) $(CFLAGS) -I $(INC) -c $<
 
 clean:
-	rm -f *.o syscalls.d $(LIB_AR) $(LIB_SO) $(SYSCALLS_SRC)
+	rm -f *.o syscalls.d $(LIB_AR) $(LIB_SO) syscall_*.S
 
 .PHONY: all clean

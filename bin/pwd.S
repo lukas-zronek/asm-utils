@@ -11,7 +11,7 @@
 		pushl $-BUF
 		leal BUF(%ebp), %eax
 		pushl %eax
-		call getcwd
+		call syscall_getcwd
 		addl $8, %esp
 
 		cmpl $0, %eax
@@ -26,12 +26,12 @@
 		jl .Lerror
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
 	.Lerror:
 		pushl ARGV(%ebp)
 		call perror
 		addl $4, %esp
 
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 

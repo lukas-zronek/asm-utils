@@ -15,7 +15,7 @@
 		pushl SIZE(%ebp)
 		pushl STRING(%ebp)
 		pushl $STDIN_FILENO
-		call read
+		call syscall_read
 		addl $12, %esp
 
 		pushl %eax

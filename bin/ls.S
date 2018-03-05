@@ -39,7 +39,7 @@
 
 	.Lopen_dir:
 
-		call open
+		call syscall_open
 		addl $8, %esp
 
 		movl %eax, FD(%ebp)
@@ -54,7 +54,7 @@
 		pushl $BUFFER_SIZE
 		pushl $buffer_data
 		pushl FD(%ebp)
-		call getdirentries
+		call syscall_getdirentries
 		addl $12, %esp
 
 		movl %eax, NREAD(%ebp)
@@ -114,14 +114,14 @@
 			jmp .Lloop
 		.Lquit:
 			pushl FD(%ebp)
-			call close
+			call syscall_close
 			addl $4, %esp
 
 			cmpl $-1, %eax
 			je .Lerror
 
 			pushl $EXIT_SUCCESS
-			call exit
+			call syscall_exit
 		.Lerror:
 			movl $1, %eax
 			pushl ARGV(%ebp, %eax, 4)
@@ -129,4 +129,4 @@
 			addl $4, %esp
 
 			pushl $EXIT_FAILURE
-			call exit
+			call syscall_exit

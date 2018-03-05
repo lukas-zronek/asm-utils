@@ -23,7 +23,7 @@
 		pushl $0
 		pushl $O_RDONLY
 		pushl SRC(%ebp)
-		call open
+		call syscall_open
 		addl $12, %esp
 
 		cmpl $-1, %eax
@@ -38,7 +38,7 @@
 		pushl $0666
 		pushl %eax
 		pushl DEST(%ebp)
-		call open
+		call syscall_open
 		addl $12, %esp
 
 		movl %eax, FD_DEST(%ebp)
@@ -50,7 +50,7 @@
 		pushl $BUFFER_SIZE
 		pushl %ebx
 		pushl FD_SRC(%ebp)
-		call read
+		call syscall_read
 		addl $12, %esp
 
 		cmpl $-1, %eax
@@ -65,7 +65,7 @@
 		pushl %eax
 		pushl %ebx
 		pushl %ecx
-		call write
+		call syscall_write
 		addl $12, %esp
 
 		cmpl $-1, %eax
@@ -74,11 +74,11 @@
 		jmp .Lloop_start
 	.Lloop_end:
 		pushl FD_SRC(%ebp)
-		call close
+		call syscall_close
 		addl $4, %esp
 
 		pushl FD_DEST(%ebp)
-		call close
+		call syscall_close
 		addl $4, %esp
 
 		jmp .Lquit
@@ -88,7 +88,7 @@
 		addl $4, %esp
 
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
@@ -96,7 +96,7 @@
 		addl $8, %esp
 
 		pushl $EXIT_FAILURE
-		call exit
+		call syscall_exit
 	.Lquit:
 		pushl $EXIT_SUCCESS
-		call exit
+		call syscall_exit
