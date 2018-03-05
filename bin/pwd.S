@@ -11,11 +11,11 @@
 		pushl $-BUF
 		leal BUF(%ebp), %eax
 		pushl %eax
-		call syscall_getcwd
+		call getcwd
 		addl $8, %esp
 
 		cmpl $0, %eax
-		jl .Lerror
+		je .Lerror
 
 		leal BUF(%ebp), %eax
 		push %eax
