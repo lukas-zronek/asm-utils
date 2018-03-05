@@ -3,7 +3,7 @@ AR := ar
 INC := inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS := -m32 -nostdlib -Wl,-shared -Wl,--no-undefined
-OBJS := syscalls.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o sleep.o strlen.o
+OBJS := fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o sleep.o strlen.o
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
@@ -17,19 +17,22 @@ else
 all: $(LIB_AR) $(LIB_SO)
 endif
 
-syscalls.S: syscalls.S.head syscalls.S.stub $(SYSCALLS_LIST)
+syscalls.d: syscalls.S.stub $(SYSCALLS_LIST)
 	./makesyscalls.sh $(SYSCALLS_LIST)
 
-$(LIB_AR): $(OBJS)
+include syscalls.d
+OBJS += $(patsubst %.S,%.o,$(SYSCALLS_SRC))
+
+$(LIB_AR): syscalls.d $(OBJS)
 	$(AR) rs $@ $(OBJS)
 
-$(LIB_SO): $(OBJS)
+$(LIB_SO): syscalls.d $(OBJS)
 	$(CC) $(LDFLAGS) -o $(LIB_SO) $(OBJS)
 
 %.o : %.S
 	$(CC) $(CFLAGS) -I $(INC) -c $<
 
 clean:
-	rm -f *.o syscalls.S $(LIB_AR) $(LIB_SO)
+	rm -f *.o syscalls.d $(LIB_AR) $(LIB_SO) $(SYSCALLS_SRC)
 
 .PHONY: all clean
