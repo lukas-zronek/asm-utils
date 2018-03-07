@@ -7,11 +7,10 @@ OBJS := fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errl
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
-SYSCALLS_LIST := syscalls.list
 UNAME := $(shell uname -s)
+SYSCALLS_LIST := syscalls.$(UNAME).list
 
 ifeq ($(UNAME),Darwin)
-SYSCALLS_LIST := syscalls.darwin.list
 all: $(LIB_AR)
 else
 all: $(LIB_AR) $(LIB_SO)
