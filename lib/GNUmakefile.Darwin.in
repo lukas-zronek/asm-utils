@@ -1,0 +1,3 @@
+OBJS := fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o
+
+all: $(LIB_AR)

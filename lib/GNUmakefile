@@ -3,18 +3,13 @@ AR := ar
 INC := inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS := -m32 -nostdlib -Wl,-shared -Wl,--no-undefined
-OBJS := fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o sleep.o strlen.o getcwd.o
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
 UNAME := $(shell uname -s)
 SYSCALLS_LIST := syscalls.$(UNAME).list
 
-ifeq ($(UNAME),Darwin)
-all: $(LIB_AR)
-else
-all: $(LIB_AR) $(LIB_SO)
-endif
+include $(wildcard *.$(UNAME).in)
 
 syscalls.d: syscalls.S.stub $(SYSCALLS_LIST)
 	./makesyscalls.sh $(SYSCALLS_LIST)
