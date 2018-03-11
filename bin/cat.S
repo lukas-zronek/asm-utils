@@ -80,6 +80,9 @@
 		je .Lcat_loop_end
 		jl .Lcat_error
 
+		xorl %ebx, %ebx /* Number of bytes already written */
+		movl %eax, %ecx /* Number of bytes to be written */
+	.Lwrite_loop:
 		pushl %eax
 		leal BUFFER(%ebp), %eax
 		pushl %eax
@@ -89,6 +92,11 @@
 
 		cmpl $-1, %eax
 		je .Lcat_error
+
+		addl %eax, %ebx
+
+		cmpl %ebx, %ecx
+		jl .Lwrite_loop
 
 		jmp .Lcat_loop_start
 	.Lcat_error:
