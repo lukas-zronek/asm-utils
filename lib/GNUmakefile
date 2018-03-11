@@ -11,8 +11,8 @@ SYSCALLS_LIST := syscalls.$(UNAME).list
 
 include $(wildcard *.$(UNAME).in)
 
-syscalls.d: syscalls.S.stub $(SYSCALLS_LIST)
-	./makesyscalls.sh $(SYSCALLS_LIST)
+syscalls.d: $(SYSCALLS_STUB) $(SYSCALLS_LIST)
+	./makesyscalls.sh $(SYSCALLS_STUB) $(SYSCALLS_LIST)
 
 include syscalls.d
 OBJS += $(patsubst %.S,%.o,$(SYSCALLS_SRC))

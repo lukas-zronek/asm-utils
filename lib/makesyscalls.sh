@@ -1,11 +1,10 @@
 #!/bin/sh
 # generate syscall stubs
 
-in=syscalls.S.stub
-
-if [ -e "$1" ]
+if [ -e "$1" ] && [ -e "$2" ]
 then
-	list=$1
+	stub=$1
+	list=$2
 else
 	exit 1
 fi
@@ -16,7 +15,7 @@ while read -r nr name
 do
 	name=syscall_$name
 	src="$src $name.S"
-	sed -e s/{NR}/"$nr"/ -e s/{NAME}/"$name"/ "$in" > "$name".S
+	sed -e s/{NR}/"$nr"/ -e s/{NAME}/"$name"/ "$stub" > "$name".S
 done < "$list"
 
 echo "SYSCALLS_SRC := $src" > syscalls.d
