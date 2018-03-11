@@ -1,0 +1,46 @@
+#include <syscall.h>
+
+#define ARG_1 8
+#define ARG_2 12
+#define ARG_3 16
+#define ARG_4 20
+#define ARG_5 24
+
+.text
+	.globl {NAME}
+	.type {NAME}, @function
+	{NAME}:
+		pushl %ebp
+		movl %esp, %ebp
+
+		pushl %ebx
+		pushl %ecx
+		pushl %edx
+		pushl %esi
+		pushl %ebp
+
+		movl ARG_1(%ebp), %ebx
+		movl ARG_2(%ebp), %ecx
+		movl ARG_3(%ebp), %edx
+		movl ARG_4(%ebp), %esi
+		movl ARG_5(%ebp), %ebp
+		movl ${NR}, %eax
+		int $SYSCALL_VECTOR
+
+		cmpl $0, %eax
+		jl .Lerror
+		jmp .Lreturn
+	.Lerror:
+		negl %eax
+		movl %eax, _errno
+		movl $-1, %eax
+	.Lreturn:
+		popl %ebp
+		popl %esi
+		popl %edx
+		popl %ecx
+		popl %ebx
+
+		movl %ebp, %esp
+		popl %ebp
+		ret
