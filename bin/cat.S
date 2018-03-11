@@ -43,6 +43,7 @@
 #define FD -4
 #define RETURN -8
 #define BUFFER -1032
+	.type .Lcat, @function
 	.Lcat:
 		pushl %ebp
 		movl %esp, %ebp
