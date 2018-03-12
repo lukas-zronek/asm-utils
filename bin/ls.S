@@ -67,66 +67,66 @@
 
 		movl $0, %edi
 
-		.Lloop:
-			cmpl NREAD(%ebp), %edi
-			jge .Lquit
+	.Lloop:
+		cmpl NREAD(%ebp), %edi
+		jge .Lquit
 
-			/*
-			/usr/include/sys/dirent.h:
-			struct dirent {
-				__uint32_t d_fileno;
-				__uint16_t d_reclen;
-				__uint8_t  d_type;
-				__uint8_t  d_namlen;
-				char       d_name[255 + 1];
-			};
+		/*
+		/usr/include/sys/dirent.h:
+		struct dirent {
+		__uint32_t d_fileno;
+			__uint16_t d_reclen;
+			__uint8_t  d_type;
+			__uint8_t  d_namlen;
+			char       d_name[255 + 1];
+		};
 
-			/usr/include/x86/_types.h:
-			typedef unsigned int __uint32_t;
-			typedef	unsigned short __uint16_t;
-			typedef	unsigned char __uint8_t;
-			*/
+		/usr/include/x86/_types.h:
+		typedef unsigned int __uint32_t;
+		typedef	unsigned short __uint16_t;
+		typedef	unsigned char __uint8_t;
+		*/
 
-			movl $buffer_data, %eax
-			addl %edi, %eax
-			movl %eax, %ebx
+		movl $buffer_data, %eax
+		addl %edi, %eax
+		movl %eax, %ebx
 
-			addl $DIRENT_NAME_OFFSET, %eax
+		addl $DIRENT_NAME_OFFSET, %eax
 
-			pushl %edi
+		pushl %edi
 
-			pushl %eax
-			call puts
-			addl $4, %esp
+		pushl %eax
+		call puts
+		addl $4, %esp
 
-			pop %edi
+		pop %edi
 
-		.Lnext:
-		
-			# d_reclen
-			movl $buffer_data, %eax
-			addl %edi, %eax
-			addl $DIRENT_RECLEN_OFFSET, %eax
-			xorl %ebx, %ebx # set register to zero
-			movw (%eax), %bx # unsigned short/__uint16_t (2 Bytes)
-			addl %ebx, %edi
+	.Lnext:
 
-			jmp .Lloop
-		.Lquit:
-			pushl FD(%ebp)
-			call syscall_close
-			addl $4, %esp
+		# d_reclen
+		movl $buffer_data, %eax
+		addl %edi, %eax
+		addl $DIRENT_RECLEN_OFFSET, %eax
+		xorl %ebx, %ebx # set register to zero
+		movw (%eax), %bx # unsigned short/__uint16_t (2 Bytes)
+		addl %ebx, %edi
 
-			cmpl $-1, %eax
-			je .Lerror
+		jmp .Lloop
+	.Lquit:
+		pushl FD(%ebp)
+		call syscall_close
+		addl $4, %esp
 
-			pushl $EXIT_SUCCESS
-			call syscall_exit
-		.Lerror:
-			movl $1, %eax
-			pushl ARGV(%ebp, %eax, 4)
-			call perror
-			addl $4, %esp
+		cmpl $-1, %eax
+		je .Lerror
 
-			pushl $EXIT_FAILURE
-			call syscall_exit
+		pushl $EXIT_SUCCESS
+		call syscall_exit
+	.Lerror:
+		movl $1, %eax
+		pushl ARGV(%ebp, %eax, 4)
+		call perror
+		addl $4, %esp
+
+		pushl $EXIT_FAILURE
+		call syscall_exit
