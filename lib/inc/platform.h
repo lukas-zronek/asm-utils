@@ -9,6 +9,10 @@
 .macro .rodata
 .section __TEXT,__const
 .endm
+#else
+.macro .rodata
+.section .rodata
+.endm
 #endif
 
 #endif /* _PLATFORM_H_ */
