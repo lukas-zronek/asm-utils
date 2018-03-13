@@ -44,6 +44,7 @@
 		addl DIR_OFFSET(%eax), %ebx
 
 		/* save offset to next dirent */
+		xorl %ecx, %ecx
 		movw DIRENT_RECLEN_OFFSET(%ebx), %cx /* unsigned short/__uint16_t (2 Bytes) */
 		addl %ecx, DIR_OFFSET(%eax)
 
