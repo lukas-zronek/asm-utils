@@ -8,7 +8,7 @@ LIB_NAME := sys
 UNAME := $(shell uname -s)
 
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< -l$(LIB_NAME)
-LDFLAGS_DYNAMIC = -dynamic -rpath $(LIB_DIR) -L$(LIB_DIR) -Wl,-as-needed -o $@ $< -l$(LIB_NAME)
+LDFLAGS_DYNAMIC = -dynamic -Wl,-rpath $(LIB_DIR) -L$(LIB_DIR) -Wl,-as-needed -o $@ $< -l$(LIB_NAME)
 
 ifeq ($(UNAME),Darwin)
 ifeq ($(MAKECMDGOALS),dynamic)
