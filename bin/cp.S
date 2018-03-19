@@ -57,9 +57,15 @@
 		call syscall_close
 		addl $4, %esp
 
+		cmpl $0, %eax
+		jne .Lerror
+
 		pushl FD_DEST(%ebp)
 		call syscall_close
 		addl $4, %esp
+
+		cmpl $0, %eax
+		jne .Lerror
 
 		jmp .Lquit
 	.Lerror:
