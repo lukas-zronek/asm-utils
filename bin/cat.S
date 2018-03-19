@@ -38,17 +38,15 @@
 	.Lquit:
 		pushl $EXIT_SUCCESS
 		call syscall_exit
-#define BUFFER_SIZE 1024
 #define FILENAME 8
 #define FD -4
 #define RETURN -8
-#define BUFFER -1032
 	.type .Lcat, @function
 	.Lcat:
 		pushl %ebp
 		movl %esp, %ebp
 
-		subl $-BUFFER, %esp
+		subl $-RETURN, %esp
 
 		pushl %edi
 
@@ -56,7 +54,7 @@
 
 		movl $STDIN_FILENO, FD(%ebp)
 		cmpl $0, FILENAME(%ebp)
-		je .Lcat_loop_start
+		je .Lcat_copyfile
 
 		pushl $0
 		pushl $O_RDONLY
@@ -68,44 +66,21 @@
 		je .Lcat_error
 
 		movl %eax, FD(%ebp)
-	.Lcat_loop_start:
-		leal BUFFER(%ebp), %eax
-		pushl $BUFFER_SIZE
-		pushl %eax
+	.Lcat_copyfile:
+		pushl $STDOUT_FILENO
 		pushl FD(%ebp)
-		call syscall_read
-		addl $12, %esp
+		call copyfile
+		addl $8, %esp
 
 		cmpl $0, %eax
-		je .Lcat_loop_end
-		jl .Lcat_error
-
-		xorl %ebx, %ebx /* Number of bytes already written */
-		movl %eax, %ecx /* Number of bytes to be written */
-	.Lwrite_loop:
-		pushl %eax
-		leal BUFFER(%ebp), %eax
-		pushl %eax
-		pushl $1
-		call syscall_write
-		addl $12, %esp
-
-		cmpl $-1, %eax
-		je .Lcat_error
-
-		addl %eax, %ebx
-
-		cmpl %ebx, %ecx
-		jl .Lwrite_loop
-
-		jmp .Lcat_loop_start
+		je .Lcat_cleanup
 	.Lcat_error:
 		movl $EXIT_FAILURE, RETURN(%ebp)
 
 		pushl FILENAME(%ebp)
 		call perror
 		addl $4, %esp
-	.Lcat_loop_end:
+	.Lcat_cleanup:
 		cmpl $STDIN_FILENO, FD(%ebp)
 		jle .Lcat_return
 

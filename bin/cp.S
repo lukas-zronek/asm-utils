@@ -5,17 +5,15 @@
 	.L.usage:
 		.asciz "usage: cp source_file target_file"
 .text
-#define BUFFER_SIZE 1024
 #define SRC 8
 #define DEST 12
 #define FD_SRC -4
 #define FD_DEST -8
-#define BUFFER -1032
 	.globl _start
 	_start:
 		movl %esp, %ebp
 
-		subl $-BUFFER, %esp
+		subl $-FD_DEST, %esp
 
 		cmpl $3, (%ebp)
 		jl .Lprint_usage
@@ -45,34 +43,15 @@
 
 		cmpl $-1, %eax
 		je .Lerror
-	.Lloop_start:
-		leal BUFFER(%ebp), %ebx
-		pushl $BUFFER_SIZE
-		pushl %ebx
-		pushl FD_SRC(%ebp)
-		call syscall_read
-		addl $12, %esp
 
-		cmpl $-1, %eax
-		je .Lerror
+		pushl FD_DEST(%ebp)
+		pushl FD_SRC(%ebp)
+		call copyfile
+		addl $8, %esp
 
 		cmpl $0, %eax
-		jle .Lloop_end
+		jne .Lerror
 
-		movl FD_DEST(%ebp), %ecx
-			
-		leal BUFFER(%ebp), %ebx
-		pushl %eax
-		pushl %ebx
-		pushl %ecx
-		call syscall_write
-		addl $12, %esp
-
-		cmpl $-1, %eax
-		je .Lerror
-
-		jmp .Lloop_start
-	.Lloop_end:
 		pushl FD_SRC(%ebp)
 		call syscall_close
 		addl $4, %esp
