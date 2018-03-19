@@ -1,14 +1,15 @@
 #include <std.h>
 #include <io.h>
 
-.rodata
-	.L.usage:
-		.asciz "usage: cp source_file target_file"
-.text
 #define SRC 8
 #define DEST 12
 #define FD_SRC -4
 #define FD_DEST -8
+
+.rodata
+	.L.usage:
+		.asciz "usage: cp source_file target_file"
+.text
 	.globl _start
 	_start:
 		movl %esp, %ebp
