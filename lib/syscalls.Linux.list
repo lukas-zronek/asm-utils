@@ -5,5 +5,6 @@
 6 close
 38 rename
 39 mkdir
+141 getdents
 162 nanosleep
 183 getcwd
