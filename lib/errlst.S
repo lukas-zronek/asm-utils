@@ -32,7 +32,7 @@
 # extern const int sys_nerr;
 .rodata
 	.L.error.0:
-		.asciz "No error: 0"				/*  0 - ENOERROR */
+		.asciz "Undefined error: 0"				/*  0 - ENOERROR */
 	.L.error.1:
 		.asciz "Operation not permitted"		/*  1 - EPERM */
 	.L.error.2:
@@ -211,42 +211,6 @@
 		.asciz "Inappropriate file type or format"	/* 79 - EFTYPE */
 	.L.error.80:
 		.asciz "Authentication error"			/* 80 - EAUTH */
-	.L.error.81:
-		.asciz "Need authenticator"			/* 81 - ENEEDAUTH */
-	.L.error.82:
-		.asciz "Identifier removed"			/* 82 - EIDRM */
-	.L.error.83:
-		.asciz "No message of desired type"		/* 83 - ENOMSG */
-	.L.error.84:
-		.asciz "Value too large to be stored in data type" /* 84 - EOVERFLOW */
-	.L.error.85:
-		.asciz "Operation canceled"			/* 85 - ECANCELED */
-	.L.error.86:
-		.asciz "Illegal byte sequence"		/* 86 - EILSEQ */
-	.L.error.87:
-		.asciz "Attribute not found"			/* 87 - ENOATTR */
-	
-/* General */
-	.L.error.88:
-		.asciz "Programming error"			/* 88 - EDOOFUS */
-
-	.L.error.89:
-		.asciz "Bad message"				/* 89 - EBADMSG */
-	.L.error.90:
-		.asciz "Multihop attempted"			/* 90 - EMULTIHOP */
-	.L.error.91:
-		.asciz "Link has been severed"		/* 91 - ENOLINK */
-	.L.error.92:
-		.asciz "Protocol error"			/* 92 - EPROTO */
-	.L.error.93:
-		.asciz "Capabilities insufficient"		/* 93 - ENOTCAPABLE */
-	.L.error.94:
-		.asciz "Not permitted in capability mode"	/* 94 - ECAPMODE */
-	.L.error.95:
-		.asciz "State not recoverable"		/* 95 - ENOTRECOVERABLE */
-	.L.error.96:
-		.asciz "Previous owner died"			/* 96 - EOWNERDEAD */
-
 	.globl sys_errlist
 	sys_errlist:
 		.long	.L.error.0
@@ -330,23 +294,7 @@
 		.long	.L.error.78
 		.long	.L.error.79
 		.long	.L.error.80
-		.long	.L.error.81
-		.long	.L.error.82
-		.long	.L.error.83
-		.long	.L.error.84
-		.long	.L.error.85
-		.long	.L.error.86
-		.long	.L.error.87
-		.long	.L.error.88
-		.long	.L.error.89
-		.long	.L.error.90
-		.long	.L.error.91
-		.long	.L.error.92
-		.long	.L.error.93
-		.long	.L.error.94
-		.long	.L.error.95
-		.long	.L.error.96
 
 	.globl sys_nerr
 	sys_nerr:
-		.long 97
+		.long 81
