@@ -18,6 +18,9 @@
 		movl %esp, %ebp
 
 		subl $BUFFER_SIZE, %esp
+
+		pushl %ebx
+		pushl %ecx
 	.Lread_loop:
 		leal BUFFER(%ebp), %eax
 		pushl $BUFFER_SIZE
@@ -55,6 +58,9 @@
 	.Lsuccess:
 		xorl %eax, %eax
 	.Lreturn:
+		popl %ecx
+		popl %ebx
+
 		movl %ebp, %esp
 		popl %ebp
 		ret
