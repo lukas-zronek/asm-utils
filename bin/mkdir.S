@@ -1,40 +1,45 @@
 #include <std.h>
 #include <io.h>
 
-#define DIR 8
+#define DIR 4
 
 .rodata
 	.L.usage:
 		.asciz "usage: mkdir directory_name"
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		cmpl $2, ARGC(%ebp)
 		jne .Lprint_usage
 
 		pushl $0755
-		pushl DIR(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl DIR(%eax)
 		call syscall_mkdir
 		addl $8, %esp
 
 		cmpl $0, %eax
 		jl .Lmkdir_error
 
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
 	.Lmkdir_error:
-		pushl DIR(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl DIR(%eax)
 		call perror
 		addl $4, %esp
-	.Lerror:
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		jmp .Lerror
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
 		call fputs
 		addl $8, %esp
-
-		jmp .Lerror
+	.Lerror:
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret

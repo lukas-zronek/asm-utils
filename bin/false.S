@@ -1,5 +1,5 @@
 .text
-	.globl _start
-	_start:
-		pushl $1
-		call syscall_exit
+	.globl _main
+	_main:
+		movl $1, %eax
+		ret

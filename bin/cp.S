@@ -1,8 +1,9 @@
 #include <std.h>
 #include <io.h>
 
-#define SRC 8
-#define DEST 12
+#define PROG 0	/* argv[0] */
+#define SRC 4	/* argv[1] */
+#define DEST 8	/* argv[2] */
 #define FD_SRC -4
 #define FD_DEST -8
 
@@ -10,23 +11,27 @@
 	.L.usage:
 		.asciz "usage: cp source_file target_file"
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		subl $-FD_DEST, %esp
 
-		cmpl $3, (%ebp)
+		cmpl $3, ARGC(%ebp)
 		jl .Lprint_usage
+
+		movl ARGV(%ebp), %eax
+		movl SRC(%eax), %eax
 
 		pushl $0
 		pushl $O_RDONLY
-		pushl SRC(%ebp)
+		pushl %eax
 		call syscall_open
 		addl $12, %esp
 
 		cmpl $-1, %eax
-		je .Lerror
+		je .Lprint_error
 
 		movl %eax, FD_SRC(%ebp)
 
@@ -34,16 +39,19 @@
 		orl $O_CREAT, %eax
 		orl $O_EXCL, %eax
 
+		movl ARGV(%ebp), %ebx
+		movl DEST(%ebx), %ebx
+
 		pushl $0666
 		pushl %eax
-		pushl DEST(%ebp)
+		pushl %ebx
 		call syscall_open
 		addl $12, %esp
 
 		movl %eax, FD_DEST(%ebp)
 
 		cmpl $-1, %eax
-		je .Lerror
+		je .Lprint_error
 
 		pushl FD_DEST(%ebp)
 		pushl FD_SRC(%ebp)
@@ -51,38 +59,38 @@
 		addl $8, %esp
 
 		cmpl $0, %eax
-		jne .Lerror
+		jne .Lprint_error
 
 		pushl FD_SRC(%ebp)
 		call syscall_close
 		addl $4, %esp
 
 		cmpl $0, %eax
-		jne .Lerror
+		jne .Lprint_error
 
 		pushl FD_DEST(%ebp)
 		call syscall_close
 		addl $4, %esp
 
 		cmpl $0, %eax
-		jne .Lerror
+		jne .Lprint_error
 
-		jmp .Lquit
-	.Lerror:
-		pushl 4(%ebp)
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
+	.Lprint_error:
+		movl ARGV(%ebp), %eax
+		pushl PROG(%eax)
 		call perror
 		addl $4, %esp
-
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		jmp .Lerror
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
 		call fputs
 		addl $8, %esp
-
-		pushl $EXIT_FAILURE
-		call syscall_exit
-	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+	.Lerror:
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret

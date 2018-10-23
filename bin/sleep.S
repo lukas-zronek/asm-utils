@@ -1,20 +1,22 @@
 #include <std.h>
 #include <io.h>
 
-#define SECONDS 8
+#define SECONDS 4
 
 .rodata
 	.L.usage:
 		.asciz "usage: sleep seconds"
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		cmpl $2, ARGC(%ebp)
 		jne .Lprint_usage
 
-		pushl SECONDS(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl SECONDS(%eax)
 		call atoi
 		addl $4, %esp
 
@@ -26,21 +28,25 @@
 		addl $4, %esp
 
 		cmpl $-1, %eax
-		jne .Lquit
+		jne .Lsuccess
 
-		pushl ARGV(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl (%eax)
 		call perror
 		addl $4, %esp
 
 		jmp .Lerror
-	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+	.Lsuccess:
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
 		call fputs
 		addl $8, %esp
 	.Lerror:
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret

@@ -8,8 +8,9 @@
 	.L.cwd:
         	.asciz "."
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		subl $-DIR, %esp
@@ -18,7 +19,8 @@
 		jl .Lnoarg
 
 		movl $1, %eax
-		pushl ARGV(%ebp, %eax, 4)
+		movl ARGV(%ebp), %edi
+		pushl (%edi, %eax, 4)
 		jmp .Lopen_dir
 
 	.Lnoarg:
@@ -54,13 +56,17 @@
 		cmpl $-1, %eax
 		je .Lerror
 
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
 	.Lerror:
 		movl $1, %eax
-		pushl ARGV(%ebp, %eax, 4)
+		movl ARGV(%ebp), %edi
+		pushl (%edi, %eax, 4)
 		call perror
 		addl $4, %esp
 
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret

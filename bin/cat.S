@@ -2,8 +2,9 @@
 #include <io.h>
 
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		movl $1, %edi
@@ -17,12 +18,13 @@
 	
 		cmpl $1, %eax
 		je .Lerror
-		jmp .Lquit
+		jmp .Lsuccess
+		movl ARGV(%ebp), %ebx
 	.Lloop:
 		cmpl ARGC(%ebp), %edi
-		jge .Lquit
+		je .Lsuccess
 
-		pushl ARGV(%ebp, %edi, 4)
+		pushl (%ebx, %edi, 4)
 		call .Lcat
 		addl $4, %esp
 
@@ -33,11 +35,14 @@
 
 		jmp .Lloop
 	.Lerror:
-		pushl $EXIT_FAILURE
-		call syscall_exit
-	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_FAILURE, %eax
+		jmp .Lreturn
+	.Lsuccess:
+		movl $EXIT_SUCCESS, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret
 #define FILENAME 8
 #define FD -4
 #define RETURN -8

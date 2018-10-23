@@ -1,4 +1,4 @@
-OBJS := copyfile.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o opendir_getdirentries.o readdir_getdirentries.o
+OBJS += copyfile.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o opendir_getdirentries.o readdir_getdirentries.o
 SYSCALLS_STUB := syscalls.cdecl.S.stub
 
 all: $(LIB_AR)

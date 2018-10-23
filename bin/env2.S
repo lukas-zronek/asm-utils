@@ -1,13 +1,14 @@
 #include <std.h>
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
-		movl $2, %edi
-		addl (%ebp), %edi
+		xorl %edi, %edi
+		movl ENV(%ebp), %ecx
 	.Lloop:
-		movl (%ebp, %edi, 4), %ebx
+		movl (%ecx, %edi, 4), %ebx
 
 		cmpl $0, %ebx
 		je .Lquit
@@ -20,5 +21,7 @@
 
 		jmp .Lloop
 	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_SUCCESS, %eax
+		movl %ebp, %esp
+		popl %ebp
+		ret

@@ -2,8 +2,9 @@
 #define BUF -1024
 
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		subl $-BUF, %esp
@@ -24,14 +25,17 @@
 
 		cmpl $0, %eax
 		jl .Lerror
-	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
 	.Lerror:
 		pushl ARGV(%ebp)
 		call perror
 		addl $4, %esp
 
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret
 

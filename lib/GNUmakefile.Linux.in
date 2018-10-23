@@ -1,4 +1,4 @@
-OBJS := copyfile.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o strlen.o getcwd_syscall_len.o sleep_nanosleep.o opendir_getdents.o readdir_getdents.o
+OBJS += copyfile.o fprintf.o itoa.o atoi.o errno.o fprint.o perror.o puts.o strerror.o errlst.o fgets.o fputs.o pow.o strlen.o getcwd_syscall_len.o sleep_nanosleep.o opendir_getdents.o readdir_getdents.o
 SYSCALLS_STUB := syscalls.register.S.stub
 
 all: $(LIB_AR) $(LIB_SO)

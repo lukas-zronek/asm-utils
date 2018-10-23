@@ -6,19 +6,21 @@
 	.L.space:
 		.asciz " "
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
-		cmpl $1, (%ebp)
+		cmpl $1, ARGC(%ebp)
 		je .Lquit
 
-		movl $2, %edi
+		movl $1, %edi
+		movl ARGV(%ebp), %ebx
 	.Lloop_start:
-		cmpl (%ebp), %edi
-		jg .Lloop_exit
+		cmpl ARGC(%ebp), %edi
+		je .Lloop_exit
 
-		pushl (%ebp, %edi, 4)
+		pushl (%ebx, %edi, 4)
 		pushl $STDOUT_FILENO
 		call fprint
 		addl $8, %esp
@@ -37,5 +39,7 @@
 		call fprint
 		addl $8, %esp
 	.Lquit:
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_SUCCESS, %eax
+		movl %ebp, %esp
+		popl %ebp
+		ret

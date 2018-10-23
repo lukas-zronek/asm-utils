@@ -1,41 +1,50 @@
 #include <std.h>
 #include <io.h>
 
-#define SRC 8
-#define DEST 12
+#define PROG 0	/* argv[0] */
+#define SRC 4	/* argv[1] */
+#define DEST 8	/* argv[2] */
 
 .rodata
 	.L.usage:
 		.asciz "usage: mv source target"
 .text
-	.globl _start
-	_start:
+	.globl _main
+	_main:
+		pushl %ebp
 		movl %esp, %ebp
 
 		cmpl $3, ARGC(%ebp)
 		jne .Lprint_usage
 
-		pushl DEST(%ebp)
-		pushl SRC(%ebp)
+		movl ARGV(%ebp), %ebx
+		movl SRC(%ebx), %ecx
+		movl DEST(%ebx), %edx
+
+		pushl %edx
+		pushl %ecx
 		call syscall_rename
 		addl $8, %esp
 
 		cmpl $0, %eax
 		jl .Lrename_error
 
-		pushl $EXIT_SUCCESS
-		call syscall_exit
+		movl $EXIT_SUCCESS, %eax
+		jmp .Lreturn
 	.Lrename_error:
-		pushl ARGV(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl PROG(%eax)
 		call perror
 		addl $4, %esp
-	.Lerror:
-		pushl $EXIT_FAILURE
-		call syscall_exit
+		jmp .Lerror
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
 		call fputs
 		addl $8, %esp
-
-		jmp .Lerror
+	.Lerror:
+		movl $EXIT_FAILURE, %eax
+	.Lreturn:
+		movl %ebp, %esp
+		popl %ebp
+		ret
