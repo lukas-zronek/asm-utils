@@ -1,4 +1,4 @@
-SUBDIRS := lib bin
+SUBDIRS := lib lib/csu bin
 
 all clean: $(SUBDIRS)
 

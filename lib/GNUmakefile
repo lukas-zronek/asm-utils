@@ -8,7 +8,6 @@ LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
 UNAME := $(shell uname -s)
 SYSCALLS_LIST := syscalls.$(UNAME).list
-OBJS = csu.o
 
 include $(wildcard *.$(UNAME).in)
 
