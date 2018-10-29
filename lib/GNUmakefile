@@ -13,7 +13,7 @@ include $(wildcard *.$(UNAME).in)
 
 ifeq ($(UNAME),Darwin)
 CFLAGS += -mmacosx-version-min=10.5
-LDFLAGS := -mmacosx-version-min=10.5 -m32 -nostdlib -Wl,-dylib -Wl,-read_only_relocs,suppress
+LDFLAGS := -mmacosx-version-min=10.5 -m32 -nostdlib -dynamiclib -Wl,-read_only_relocs,suppress -install_name @rpath/$(LIB_SO)
 endif
 
 syscalls.d: $(SYSCALLS_STUB) $(SYSCALLS_LIST)
