@@ -8,6 +8,23 @@
  * 	char *buffer;
  * 	int offset;
  * }
+ *
+ * This implementation uses the getdirentries syscall of FreeBSD and macOS:
+ *
+ * 	int getdirentries(int fd, char *buf, u_int count, long *basep);
+ *
+ *	struct dirent {
+ *		__uint32_t d_fileno;
+ *		__uint16_t d_reclen;
+ *		__uint8_t  d_type;
+ *		__uint8_t  d_namlen;
+ *		char       d_name[255 + 1];
+ *	};
+ *
+ *	typedef unsigned int __uint32_t;
+ *	typedef	unsigned short __uint16_t;
+ *	typedef	unsigned char __uint8_t;
+ *
  */
 
 #include <io.h>

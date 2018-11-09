@@ -1,6 +1,42 @@
 /*
- * C runtime stack setup
+ * C startup code for i386
+ *
+ * The kernel is expected to set up the stack as follows:
+ *
+ *  higher adresses |      ...      |
+ *                  + - - - - - - - +
+ *                  |       0       |
+ *                  + - - - - - - - +
+ *                  |    &env[n]    |
+ *                  + - - - - - - - +
+ *                  |      ...      |
+ *                  + - - - - - - - +
+ *                  |    &env[0]    |      esp + argc * 4 + 1
+ *                  + - - - - - - - +
+ *                  |       0       |
+ *                  + - - - - - - - +
+ *                  | &argv[argc-1] |
+ *                  + - - - - - - - +
+ *                  |      ...      |
+ *                  + - - - - - - - +
+ *                  |    &argv[0]   |      esp + 4
+ *                  + - - - - - - - +
+ *                  |     argc      |   <- esp
+ *  lower adresses  + - - - - - - - +
+ *
+ * After running the c startup code, the stack looks like this:
+ *
+ *  higher adresses |      ...      |
+ *                  + - - - - - - - +
+ *                  |    &env[0]    |
+ *                  + - - - - - - - +
+ *                  |    &argv[0]   |
+ *                  + - - - - - - - +
+ *                  |     argc      |   <- %esp
+ *  lower adresses  + - - - - - - - +
+ *
  */
+
 #define ARGC 0
 #define ARGV 4
 
