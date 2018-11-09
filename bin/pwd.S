@@ -29,7 +29,8 @@
 		movl $EXIT_SUCCESS, %eax
 		jmp .Lreturn
 	.Lerror:
-		pushl ARGV(%ebp)
+		movl ARGV(%ebp), %eax
+		pushl (%eax)
 		call perror
 		addl $4, %esp
 
