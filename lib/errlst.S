@@ -26,10 +26,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-# derived from $FreeBSD: releng/11.1/lib/libc/gen/errlst.c 275004 2014-11-25 03:50:31Z emaste $
+/*
+ * The list of error conditions was derived from FreeBSD:
+ * 	$FreeBSD: releng/11.1/lib/libc/gen/errlst.c 275004 2014-11-25 03:50:31Z emaste $
+ *
+ * extern const char * const sys_errlist[];
+ * extern const int sys_nerr;
+ */
 
-# extern const char * const sys_errlist[];
-# extern const int sys_nerr;
 .rodata
 	.L.error.0:
 		.asciz "Undefined error: 0"				/*  0 - ENOERROR */
@@ -98,119 +102,6 @@
 	.L.error.32:
 		.asciz "Broken pipe"				/* 32 - EPIPE */
 
-/* math software */
-	.L.error.33:
-		.asciz "Numerical argument out of domain"	/* 33 - EDOM */
-	.L.error.34:
-		.asciz "Result too large"			/* 34 - ERANGE */
-
-/* non-blocking and interrupt i/o */
-	.L.error.35:
-		.asciz "Resource temporarily unavailable"	/* 35 - EAGAIN */
-						/* 35 - EWOULDBLOCK */
-	.L.error.36:
-		.asciz "Operation now in progress"		/* 36 - EINPROGRESS */
-	.L.error.37:
-		.asciz "Operation already in progress"	/* 37 - EALREADY */
-
-/* ipc/network software -- argument errors */
-	.L.error.38:
-		.asciz "Socket operation on non-socket"	/* 38 - ENOTSOCK */
-	.L.error.39:
-		.asciz "Destination address required"		/* 39 - EDESTADDRREQ */
-	.L.error.40:
-		.asciz "Message too long"			/* 40 - EMSGSIZE */
-	.L.error.41:
-		.asciz "Protocol wrong type for socket"	/* 41 - EPROTOTYPE */
-	.L.error.42:
-		.asciz "Protocol not available"		/* 42 - ENOPROTOOPT */
-	.L.error.43:
-		.asciz "Protocol not supported"		/* 43 - EPROTONOSUPPORT */
-	.L.error.44:
-		.asciz "Socket type not supported"		/* 44 - ESOCKTNOSUPPORT */
-	.L.error.45:
-		.asciz "Operation not supported"		/* 45 - EOPNOTSUPP */
-	.L.error.46:
-		.asciz "Protocol family not supported"	/* 46 - EPFNOSUPPORT */
-						/* 47 - EAFNOSUPPORT */
-	.L.error.47:
-		.asciz "Address family not supported by protocol family"
-	.L.error.48:
-		.asciz "Address already in use"		/* 48 - EADDRINUSE */
-	.L.error.49:
-		.asciz "Can't assign requested address"	/* 49 - EADDRNOTAVAIL */
-
-/* ipc/network software -- operational errors */
-	.L.error.50:
-		.asciz "Network is down"			/* 50 - ENETDOWN */
-	.L.error.51:
-		.asciz "Network is unreachable"		/* 51 - ENETUNREACH */
-	.L.error.52:
-		.asciz "Network dropped connection on reset"	/* 52 - ENETRESET */
-	.L.error.53:
-		.asciz "Software caused connection abort"	/* 53 - ECONNABORTED */
-	.L.error.54:
-		.asciz "Connection reset by peer"		/* 54 - ECONNRESET */
-	.L.error.55:
-		.asciz "No buffer space available"		/* 55 - ENOBUFS */
-	.L.error.56:
-		.asciz "Socket is already connected"		/* 56 - EISCONN */
-	.L.error.57:
-		.asciz "Socket is not connected"		/* 57 - ENOTCONN */
-	.L.error.58:
-		.asciz "Can't send after socket shutdown"	/* 58 - ESHUTDOWN */
-	.L.error.59:
-		.asciz "Too many references: can't splice"	/* 59 - ETOOMANYREFS */
-	.L.error.60:
-		.asciz "Operation timed out"			/* 60 - ETIMEDOUT */
-	.L.error.61:
-		.asciz "Connection refused"			/* 61 - ECONNREFUSED */
-
-	.L.error.62:
-		.asciz "Too many levels of symbolic links"	/* 62 - ELOOP */
-	.L.error.63:
-		.asciz "File name too long"			/* 63 - ENAMETOOLONG */
-
-/* should be rearranged */
-	.L.error.64:
-		.asciz "Host is down"				/* 64 - EHOSTDOWN */
-	.L.error.65:
-		.asciz "No route to host"			/* 65 - EHOSTUNREACH */
-	.L.error.66:
-		.asciz "Directory not empty"			/* 66 - ENOTEMPTY */
-
-/* quotas & mush */
-	.L.error.67:
-		.asciz "Too many processes"			/* 67 - EPROCLIM */
-	.L.error.68:
-		.asciz "Too many users"			/* 68 - EUSERS */
-	.L.error.69:
-		.asciz "Disc quota exceeded"			/* 69 - EDQUOT */
-
-/* Network File System */
-	.L.error.70:
-		.asciz "Stale NFS file handle"		/* 70 - ESTALE */
-	.L.error.71:
-		.asciz "Too many levels of remote in path"	/* 71 - EREMOTE */
-	.L.error.72:
-		.asciz "RPC struct is bad"			/* 72 - EBADRPC */
-	.L.error.73:
-		.asciz "RPC version wrong"			/* 73 - ERPCMISMATCH */
-	.L.error.74:
-		.asciz "RPC prog. not avail"			/* 74 - EPROGUNAVAIL */
-	.L.error.75:
-		.asciz "Program version wrong"		/* 75 - EPROGMISMATCH */
-	.L.error.76:
-		.asciz "Bad procedure for program"		/* 76 - EPROCUNAVAIL */
-
-	.L.error.77:
-		.asciz "No locks available"			/* 77 - ENOLCK */
-	.L.error.78:
-		.asciz "Function not implemented"		/* 78 - ENOSYS */
-	.L.error.79:
-		.asciz "Inappropriate file type or format"	/* 79 - EFTYPE */
-	.L.error.80:
-		.asciz "Authentication error"			/* 80 - EAUTH */
 	.globl sys_errlist
 	sys_errlist:
 		.long	.L.error.0
@@ -246,55 +137,7 @@
 		.long	.L.error.30
 		.long	.L.error.31
 		.long	.L.error.32
-		.long	.L.error.33
-		.long	.L.error.34
-		.long	.L.error.35
-		.long	.L.error.36
-		.long	.L.error.37
-		.long	.L.error.38
-		.long	.L.error.39
-		.long	.L.error.40
-		.long	.L.error.41
-		.long	.L.error.42
-		.long	.L.error.43
-		.long	.L.error.44
-		.long	.L.error.45
-		.long	.L.error.46
-		.long	.L.error.47
-		.long	.L.error.48
-		.long	.L.error.49
-		.long	.L.error.50
-		.long	.L.error.51
-		.long	.L.error.52
-		.long	.L.error.53
-		.long	.L.error.54
-		.long	.L.error.55
-		.long	.L.error.56
-		.long	.L.error.57
-		.long	.L.error.58
-		.long	.L.error.59
-		.long	.L.error.60
-		.long	.L.error.61
-		.long	.L.error.62
-		.long	.L.error.63
-		.long	.L.error.64
-		.long	.L.error.65
-		.long	.L.error.66
-		.long	.L.error.67
-		.long	.L.error.68
-		.long	.L.error.69
-		.long	.L.error.70
-		.long	.L.error.71
-		.long	.L.error.72
-		.long	.L.error.73
-		.long	.L.error.74
-		.long	.L.error.75
-		.long	.L.error.76
-		.long	.L.error.77
-		.long	.L.error.78
-		.long	.L.error.79
-		.long	.L.error.80
 
 	.globl sys_nerr
 	sys_nerr:
-		.long 81
+		.long 33
