@@ -3,6 +3,7 @@
 #include <dir.h>
 
 #define DIR -4
+#define CWD -8
 
 .rodata
 	.L.cwd:
@@ -13,20 +14,21 @@
 		pushl %ebp
 		movl %esp, %ebp
 
-		subl $-DIR, %esp
+		subl $-CWD, %esp
 
 		cmpl $2, ARGC(%ebp)
 		jl .Lnoarg
 
 		movl $1, %eax
 		movl ARGV(%ebp), %edi
-		pushl (%edi, %eax, 4)
+		movl (%edi, %eax, 4), %ebx
+		movl %ebx, CWD(%ebp)
+
 		jmp .Lopen_dir
-
 	.Lnoarg:
-		pushl $.L.cwd
-
+		movl $.L.cwd, CWD(%ebp)
 	.Lopen_dir:
+		pushl CWD(%ebp)
 		call opendir
 		addl $4, %esp
 
@@ -59,9 +61,7 @@
 		movl $EXIT_SUCCESS, %eax
 		jmp .Lreturn
 	.Lerror:
-		movl $1, %eax
-		movl ARGV(%ebp), %edi
-		pushl (%edi, %eax, 4)
+		pushl CWD(%ebp)
 		call perror
 		addl $4, %esp
 
