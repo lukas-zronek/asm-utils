@@ -1,7 +1,8 @@
 /*
  * DIR *opendir(const char *filename);
  *
- * This function opens the directory named by filename and returns a DIR structure on success or 0 on error.
+ * This function opens the directory named by filename and returns a DIR
+ * structure on success or 0 on error.
  *
  * struct DIR {
  * 	int fd;
@@ -11,7 +12,8 @@
  *
  * This implementation uses the getdents syscall of the Linux kernel:
  *
- * 	int getdents(unsigned int fd, struct linux_dirent *dirp, unsigned int count);
+ * 	int getdents(unsigned int fd, struct linux_dirent *dirp,
+ *		unsigned int count);
  *
  *	struct linux_dirent {
  *		unsigned long d_ino;

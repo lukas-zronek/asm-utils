@@ -2,7 +2,8 @@
  * char *itoa(int value, char *buffer, int buffer_size);
  *
  * This function converts an integer to ASCII,
- * copies it to the buffer and returns the pointer to the start of the string or 0 on error.
+ * copies it to the buffer and returns the pointer to the start of the string
+ * or 0 on error.
  *
  */
 

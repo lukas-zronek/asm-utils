@@ -1,7 +1,8 @@
 /*
  * DIR *opendir(const char *filename);
  *
- * This function opens the directory named by filename and returns a DIR structure on success or 0 on error.
+ * This function opens the directory named by filename and returns a DIR
+ * structure on success or 0 on error.
  *
  * struct DIR {
  * 	int fd;

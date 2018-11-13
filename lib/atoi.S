@@ -1,10 +1,9 @@
 /*
  * int atoi(const char *nptr);
  *
- * This function converts an ASCII character digit to the corresponding integer.
- * Numbers are always treated as decimal.
- * If characters are found that can not be interpreted,
- * the conversion is aborted and the previously
+ * This function converts an ASCII character digit to the corresponding
+ * integer. Numbers are always treated as decimal. If characters are found that
+ * can not be interpreted, the conversion is aborted and the previously
  * interpreted number is returned.
  *
  */

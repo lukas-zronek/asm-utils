@@ -1,11 +1,14 @@
 /*
  * char * getcwd(char *buf, size_t size);
  *
- * This implementation uses the fcntl syscall with the macOS specific F_GETPATH command:
+ * This implementation uses the fcntl syscall with the macOS specific
+ * F_GETPATH command:
  *
  *	int fcntl(int fildes, int cmd, ...);
  *
- *	F_GETPATH	Get the path of the file descriptor Fildes. The argument must be a buffer of size MAXPATHLEN or greater.
+ *	F_GETPATH	Get the path of the file descriptor Fildes.
+ *			The argument must be a buffer of size MAXPATHLEN
+ *			or greater.
  *
  */
 

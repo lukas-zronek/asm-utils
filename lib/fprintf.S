@@ -9,7 +9,10 @@
 
 #define FD 8
 #define FORMAT 12
-/* the biggest long number converted to a string may require a maximum of 11 bytes of space on stack */
+/*
+ * the biggest long number converted to a string may require a maximum of
+ * 11 bytes of space on stack
+ */
 #define ITOA_BUFFER -16
 
 #define ASCII_PERCENT_SIGN 37
@@ -25,8 +28,10 @@
 
 		subl $-ITOA_BUFFER, %esp
 
-		xorl %edi, %edi /* offset to current char in the format string */
-		xorl %ecx, %ecx /* offset to current argument */
+		/* offset to current char in the format string */
+		xorl %edi, %edi
+		/* offset to current argument */
+		xorl %ecx, %ecx
 
 		.Lloop:
 			movl FORMAT(%ebp), %eax

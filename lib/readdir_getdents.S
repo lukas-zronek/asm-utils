@@ -5,7 +5,8 @@
  *
  * This implementation uses the getdents syscall of the Linux kernel:
  *
- * 	int getdents(unsigned int fd, struct linux_dirent *dirp, unsigned int count);
+ * 	int getdents(unsigned int fd, struct linux_dirent *dirp,
+ *		unsigned int count);
  *
  *	struct linux_dirent {
  *		unsigned long d_ino;
@@ -39,7 +40,8 @@
 
 		/* save offset to next dirent */
 		xorl %ecx, %ecx
-		movw DIRENT_RECLEN_OFFSET(%ebx), %cx /* unsigned short int (2 Bytes) */
+		/* unsigned short int (2 Bytes) */
+		movw DIRENT_RECLEN_OFFSET(%ebx), %cx
 		addl %ecx, DIR_OFFSET(%eax)
 
 		xorl %eax, %eax
