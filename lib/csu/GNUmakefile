@@ -1,4 +1,3 @@
-CC := clang
 INC := ../inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 

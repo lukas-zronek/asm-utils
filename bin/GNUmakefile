@@ -1,4 +1,3 @@
-CC := clang
 LIB_DIR := $(realpath ../lib)
 INC := $(LIB_DIR)/inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
