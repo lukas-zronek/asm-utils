@@ -17,13 +17,14 @@
 		pushl %ecx
 		pushl %edx
 		pushl %esi
+		pushl %edi
 		pushl %ebp
 
 		movl ARG_1(%ebp), %ebx
 		movl ARG_2(%ebp), %ecx
 		movl ARG_3(%ebp), %edx
 		movl ARG_4(%ebp), %esi
-		movl ARG_5(%ebp), %ebp
+		movl ARG_5(%ebp), %edi
 		movl ${NR}, %eax
 		int $SYSCALL_VECTOR
 
@@ -36,6 +37,7 @@
 		movl $-1, %eax
 	.Lreturn:
 		popl %ebp
+		popl %edi
 		popl %esi
 		popl %edx
 		popl %ecx
