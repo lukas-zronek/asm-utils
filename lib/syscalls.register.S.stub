@@ -1,3 +1,6 @@
+/*
+ * Syscall template for the Linux kernel
+ */
 #include <syscall.h>
 
 #define ARG_1 8
@@ -20,6 +23,11 @@
 		pushl %edi
 		pushl %ebp
 
+		/*
+		 * On x86 the Linux kernel expects the syscall number to be
+		 * passed to %eax and the parameters to %ebx, %ecx, %edx, %esi,
+		 * %edi and %ebp.
+		 */
 		movl ARG_1(%ebp), %ebx
 		movl ARG_2(%ebp), %ecx
 		movl ARG_3(%ebp), %edx
