@@ -1,6 +1,12 @@
 /*
  * char * getcwd(char *buf, size_t size);
  *
+ * This implementation uses the getcwd syscall of the FreeBSD:
+ *
+ *	int getcwd(char *buf, size_t buflen);
+ *
+ * FreeBSD returns a pointer to the buffer on success and NULL on error.
+ *
  */
 
 #define BUF 8

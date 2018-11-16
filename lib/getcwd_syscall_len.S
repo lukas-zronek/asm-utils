@@ -1,6 +1,12 @@
 /*
  * char * getcwd(char *buf, size_t size);
  *
+ * This implementation uses the getcwd syscall of the Linux kernel:
+ *
+ *	int getcwd(char *buf, unsigned long size);
+ *
+ * Linux returns the length of the buffer filled or a negative value on error.
+ *
  */
 
 #define BUF 8
