@@ -43,15 +43,15 @@
 		movl NPTR(%ebp), %eax
 		movb (%eax, %edi, 1), %bl
 
-		# '-' ... 45
+		/* '-' ... 45 */
 		cmpb $45, %bl
 		je .Lnegative
 
-		# '0' ... 48
+		/* '0' ... 48 */
 		cmpb $48, %bl
 		jl .Lquit
 
-		# '9' ... 57
+		/* '9' ... 57 */
 		cmpb $57, %bl
 		jg .Lquit
 
@@ -62,7 +62,7 @@
 		call pow
 		addl $8, %esp
 
-		# %eax = %ebx * %eax
+		/* %eax = %ebx * %eax */
 		mull %ebx
 
 		movl RESULT(%ebp), %ebx

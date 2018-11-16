@@ -1,4 +1,6 @@
-# size_t strlen(const char *s);
+/*
+ * size_t strlen(const char *s);
+ */
 
 #define STRING 8
 

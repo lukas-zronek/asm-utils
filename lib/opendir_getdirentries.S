@@ -59,7 +59,7 @@
 
 		movl %eax, dir+DIR_FD
 
-		# a = &basep
+		/* a = &basep */
 		leal BASEP(%ebp), %eax
 
 		pushl %eax

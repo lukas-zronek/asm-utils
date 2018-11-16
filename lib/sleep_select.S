@@ -1,4 +1,6 @@
-# int sleep(int seconds);
+/*
+ * int sleep(int seconds);
+ */
 
 #define SECONDS 8
 

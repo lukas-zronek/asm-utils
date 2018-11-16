@@ -51,7 +51,7 @@
 		/* calculate address of env[0]: */
 		addl $1, %eax
 		movl $4, %ecx
-		# %eax = %ecx * %eax
+		/* %eax = %ecx * %eax */
 		mull %ecx
 		addl %ebx, %eax
 

@@ -1,4 +1,6 @@
-# char *strerror(int errnum);
+/*
+ * char *strerror(int errnum);
+ */
 
 #define ERRNUM 8
 

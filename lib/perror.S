@@ -1,4 +1,6 @@
-# void perror(const char *string);
+/*
+ * void perror(const char *string);
+ */
 
 #include <io.h>
 
