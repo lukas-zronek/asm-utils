@@ -1,4 +1,20 @@
-# int sleep(int seconds);
+/*
+ * int sleep(int seconds);
+ *
+ * This implementation uses the nanosleep syscall of FreeBSD and Linux:
+ *
+ *	int nanosleep(const struct timespec *rqtp, struct timespec *rmtp);
+ *
+ *	struct timespec {
+ *		time_t  tv_sec;
+ *		long    tv_nsec;
+ *	};
+ *
+ *	typedef	__time_t time_t;
+ *	typedef __int32_t __time_t;
+ *	typedef	int __int32_t;
+ *
+ */
 
 #define SECONDS 8
 #define TIMESPEC_SEC -8
@@ -12,21 +28,6 @@
 		movl %esp, %ebp
 
 		subl $-TIMESPEC_SEC, %esp
-
-		/*
-		/usr/include/sys/_timespec.h:
-		struct timespec {
-		   time_t  tv_sec;
-		   long    tv_nsec;
-		};
-
-		/usr/include/sys/types.h:
-		typedef	__time_t time_t;
-
-		/usr/include/x86/_types.h:
-		typedef __int32_t __time_t;
-		typedef	int       __int32_t;
-		*/
 
 		movl SECONDS(%ebp), %eax
 		movl %eax, TIMESPEC_SEC(%ebp)

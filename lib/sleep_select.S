@@ -1,5 +1,17 @@
 /*
  * int sleep(int seconds);
+ *
+ * On macOS, sleep() is implemented with the select syscall, because xnu has
+ * no sleep syscall and the clock_sleep mach trap would be harder to use.
+ *
+ *	int select(int nd, u_int32_t *in, u_int32_t *ou, u_int32_t *ex,
+ *			struct timeval *tv)
+ *
+ *	struct timeval {
+ *		time_t		tv_sec;  # seconds
+ *		suseconds_t	tv_usec; # microseconds
+ *	};
+ *
  */
 
 #define SECONDS 8
@@ -15,13 +27,6 @@
 		movl %esp, %ebp
 
 		subl $-TIMEVAL_SEC, %esp
-
-		/*
-		 * struct timeval {
-		 * 	time_t		tv_sec;  # seconds
-		 * 	suseconds_t	tv_usec; # microseconds
-		 * };
-		 */
 
 		movl SECONDS(%ebp), %eax
 		movl %eax, TIMEVAL_SEC(%ebp)
