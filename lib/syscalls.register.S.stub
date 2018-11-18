@@ -1,7 +1,6 @@
 /*
  * Syscall template for the Linux kernel
  */
-#include <syscall.h>
 
 #define ARG_1 8
 #define ARG_2 12
@@ -34,7 +33,7 @@
 		movl ARG_4(%ebp), %esi
 		movl ARG_5(%ebp), %edi
 		movl ${NR}, %eax
-		int $SYSCALL_VECTOR
+		int $0x80
 
 		cmpl $0, %eax
 		jl .Lerror

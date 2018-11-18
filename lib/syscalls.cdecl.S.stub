@@ -1,7 +1,6 @@
 /*
  * Syscall template for FreeBSD and macOS
  */
-#include <syscall.h>
 
 #define ARG_1 8
 #define ARG_2 12
@@ -35,7 +34,7 @@
 		jc .Lerror
 		jmp .Lreturn
 	.Lkernel:
-		int $SYSCALL_VECTOR
+		int $0x80
 		ret
 	.Lerror:
 		/*
