@@ -9,15 +9,9 @@ UNAME := $(shell uname -s)
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< $(LIB_DIR)/csu/start.o -l$(LIB_NAME)
 LDFLAGS_DYNAMIC = -dynamic -Wl,-rpath $(LIB_DIR) -L$(LIB_DIR) -Wl,-as-needed -o $@ $< $(LIB_DIR)/csu/start.o -l$(LIB_NAME)
 
-ifeq ($(UNAME),Darwin)
-ifeq ($(MAKECMDGOALS),dynamic)
-$(error dynamic target is not supported on macOS)
-endif
-DEFAULT_TARGET := static strip
-LDFLAGS += -Wl,-e,_start
-else
 DEFAULT_TARGET := dynamic
-endif
+
+include $(wildcard *.$(UNAME).in)
 
 all: $(DEFAULT_TARGET)
 

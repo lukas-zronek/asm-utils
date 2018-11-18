@@ -1,0 +1,6 @@
+ifeq ($(MAKECMDGOALS),dynamic)
+$(error dynamic target is not supported on macOS)
+endif
+
+DEFAULT_TARGET := static strip
+LDFLAGS += -Wl,-e,_start
