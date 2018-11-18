@@ -1,6 +1,11 @@
 ifeq ($(MAKECMDGOALS),dynamic)
-$(error dynamic target is not supported on macOS)
+$(warning Dynamic linking is not fully supported on macOS)
+CSU := $(shell xcrun --show-sdk-path)/usr/lib/crt1.10.5.o
+LDFLAGS += -Wl,-alias,syscall_exit,_exit
+else
+LDFLAGS += -Wl,-e,_start
 endif
 
 DEFAULT_TARGET := static strip
-LDFLAGS += -Wl,-e,_start
+
+export MACOSX_DEPLOYMENT_TARGET=10.05

@@ -1,7 +1,8 @@
 AR := ar
 INC := inc
 CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
-LDFLAGS := -m32 -nostdlib -Wl,-shared -Wl,--no-undefined
+LDFLAGS_EXTRA := -Wl,-shared -Wl,--no-undefined
+LDFLAGS = -m32 -nostdlib $(LDFLAGS_EXTRA)
 LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
