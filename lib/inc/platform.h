@@ -1,11 +1,16 @@
 #ifndef _PLATFORM_H_
 #define _PLATFORM_H_
 
+/*
+ * .type directive is not available on macOS, it is overwritten with
+ * an empty macro.
+ */
 #ifdef __APPLE__
-/* .type directive is not available on macOS, it is overwritten with an empty macro */
 .macro .type
 .endm
+#endif
 
+#ifdef __APPLE__
 .macro .rodata
 .section __TEXT,__const
 .endm
