@@ -105,10 +105,6 @@
 		.Lerror:
 			movl $EXIT_FAILURE, %eax
 			jmp .Lquit
-
-			movl %ebp, %esp
-			popl %ebp
-			ret
 		.Lreturn:
 			movl $EXIT_SUCCESS, %eax
 		.Lquit:
