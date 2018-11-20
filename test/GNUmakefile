@@ -1,5 +1,5 @@
 LIB_DIR := $(realpath ../lib)
-CFLAGS := -O0 -m32 -nostdinc -Wall -fno-builtin
+CFLAGS := -O0 -m32 -nostdinc -Wall -fno-builtin -fno-pie
 LDFLAGS := -m32 -nostdlib
 EXEC := arg
 LIB_NAME := sys
