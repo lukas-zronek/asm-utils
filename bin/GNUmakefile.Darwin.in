@@ -1,7 +1,7 @@
 ifeq ($(MAKECMDGOALS),dynamic)
 $(warning Dynamic linking is not fully supported on macOS)
 CSU := $(shell xcrun --show-sdk-path)/usr/lib/crt1.10.5.o
-LDFLAGS += -Wl,-alias,syscall_exit,_exit
+LDFLAGS += -Wl,-alias,syscall_exit,_exit -Wl,-alias,main,_main
 else
 LDFLAGS += -Wl,-e,_start
 endif

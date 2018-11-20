@@ -59,7 +59,7 @@
 		pushl %ebx
 		pushl ARGC(%ebp)
 		
-		call _main
+		call main
 
 		pushl %eax
 		call syscall_exit

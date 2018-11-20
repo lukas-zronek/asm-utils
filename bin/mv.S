@@ -9,8 +9,8 @@
 	.L.usage:
 		.asciz "usage: mv source target"
 .text
-	.globl _main
-	_main:
+	.globl main
+	main:
 		pushl %ebp
 		movl %esp, %ebp
 

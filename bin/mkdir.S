@@ -7,8 +7,8 @@
 	.L.usage:
 		.asciz "usage: mkdir directory_name"
 .text
-	.globl _main
-	_main:
+	.globl main
+	main:
 		pushl %ebp
 		movl %esp, %ebp
 

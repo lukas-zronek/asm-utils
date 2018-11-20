@@ -1,7 +1,7 @@
 #include <std.h>
 .text
-	.globl _main
-	_main:
+	.globl main
+	main:
 		pushl %ebp
 		movl %esp, %ebp
 

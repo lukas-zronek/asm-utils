@@ -2,8 +2,8 @@
 #define BUF -1024
 
 .text
-	.globl _main
-	_main:
+	.globl main
+	main:
 		pushl %ebp
 		movl %esp, %ebp
 

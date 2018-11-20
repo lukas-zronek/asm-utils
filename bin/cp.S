@@ -11,8 +11,8 @@
 	.L.usage:
 		.asciz "usage: cp source_file target_file"
 .text
-	.globl _main
-	_main:
+	.globl main
+	main:
 		pushl %ebp
 		movl %esp, %ebp
 
