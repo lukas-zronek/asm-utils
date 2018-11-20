@@ -32,7 +32,8 @@
 		decl %edi
 
 		movl BUFFER(%ebp), %eax
-		movl $0, (%eax, %edi, 1)
+		addl %edi, %eax
+		movb $0, (%eax)
 
 	.Lloop:
 		/* %eax / 10 = %eax; %eax % 10 = %edx */
@@ -46,7 +47,8 @@
 
 		decl %edi
 		movl BUFFER(%ebp), %eax
-		movb %dl, (%eax, %edi, 1)
+		addl %edi, %eax
+		movb %dl, (%eax)
 
 		cmpl $0, VALUE(%ebp)
 		je .Lreturn
@@ -57,7 +59,7 @@
 		jmp .Lloop
 	.Lreturn:
 		movl BUFFER(%ebp), %eax
-		leal (%eax, %edi, 1), %eax
+		addl %edi, %eax
 	.Lquit:
 		popl %edi
 		popl %edx
