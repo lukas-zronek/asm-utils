@@ -28,6 +28,10 @@
 
 		subl $-ITOA_BUFFER, %esp
 
+		pushl %ebx
+		pushl %ecx
+		pushl %edi
+
 		/* offset to current char in the format string */
 		xorl %edi, %edi
 		/* offset to current argument */
@@ -108,6 +112,10 @@
 		.Lreturn:
 			movl $EXIT_SUCCESS, %eax
 		.Lquit:
+			popl %edi
+			popl %ecx
+			popl %ebx
+
 			movl %ebp, %esp
 			popl %ebp
 			ret
