@@ -1,8 +1,7 @@
-INC := ../inc
-CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
+CFLAGS := -m32 -nostdinc -Wall
 
 start.o : start.S
-	$(CC) $(CFLAGS) -I $(INC) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f *.o
