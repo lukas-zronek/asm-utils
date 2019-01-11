@@ -1,3 +1,6 @@
+/*
+ * env2 is an alternative implementation of env
+ */
 #include <std.h>
 .text
 	.globl main
