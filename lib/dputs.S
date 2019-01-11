@@ -1,3 +1,9 @@
+/*
+ * int dputs(int fd, const char *s);
+ *
+ * This function writes the string pointed to by s to the given file descriptor
+ */
+
 #define FD 8
 #define STRING 12
 
