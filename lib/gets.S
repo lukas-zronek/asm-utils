@@ -4,9 +4,9 @@
 #define STRING 8
 
 .text
-	.globl fgets
-	.type fgets, @function
-	fgets:
+	.globl gets
+	.type gets, @function
+	gets:
 		pushl %ebp
 		movl %esp, %ebp
 

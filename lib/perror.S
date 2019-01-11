@@ -24,7 +24,7 @@
 		pushl STRING(%ebp)
 		pushl $.L.format
 		pushl $STDERR_FILENO
-		call fprintf
+		call dprintf
 
 		movl %ebp, %esp
 		popl %ebp

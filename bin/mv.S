@@ -40,7 +40,7 @@
 	.Lprint_usage:
 		push $.L.usage
 		push $STDERR_FILENO
-		call fputs
+		call dputs
 		addl $8, %esp
 	.Lerror:
 		movl $EXIT_FAILURE, %eax

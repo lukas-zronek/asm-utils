@@ -1,5 +1,5 @@
 /*
- * int fprintf(int fd, const char * restrict format, ...);
+ * int dprintf(int fd, const char * restrict format, ...);
  *
  * Supported arguments in the format string: %s, %d
  */
@@ -20,9 +20,9 @@
 #define ASCII_D 100
 
 .text
-	.globl fprintf
-	.type fprintf, @function
-	fprintf:
+	.globl dprintf
+	.type dprintf, @function
+	dprintf:
 		pushl %ebp
 		movl %esp, %ebp
 
@@ -80,7 +80,7 @@
 
 			pushl %eax
 			pushl FD(%ebp)
-			call fprint
+			call dprint
 			addl $8, %esp
 
 			jmp .Lend_of_loop
@@ -89,7 +89,7 @@
 
 			pushl FORMAT(%ebp, %ecx, 4)
 			pushl FD(%ebp)
-			call fprint
+			call dprint
 			addl $8, %esp
 
 			jmp .Lend_of_loop

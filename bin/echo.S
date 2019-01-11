@@ -22,21 +22,21 @@
 
 		pushl (%ebx, %edi, 4)
 		pushl $STDOUT_FILENO
-		call fprint
+		call dprint
 		addl $8, %esp
 
 		incl %edi
 
 		pushl $.L.space
 		pushl $STDOUT_FILENO
-		call fprint
+		call dprint
 		addl $8, %esp
 
 		jmp .Lloop_start
 	.Lloop_exit:
 		pushl $.L.newline
 		pushl $STDOUT_FILENO
-		call fprint
+		call dprint
 		addl $8, %esp
 	.Lquit:
 		movl $EXIT_SUCCESS, %eax

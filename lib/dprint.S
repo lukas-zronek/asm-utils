@@ -2,9 +2,9 @@
 #define FD 8
 
 .text
-	.globl fprint
-	.type fprint, @function
-	fprint:
+	.globl dprint
+	.type dprint, @function
+	dprint:
 		pushl %ebp
 		movl %esp, %ebp
 

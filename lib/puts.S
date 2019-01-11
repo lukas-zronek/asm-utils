@@ -15,7 +15,7 @@
 
 		pushl STRING(%ebp)
 		pushl $STDOUT_FILENO
-		call fputs
+		call dputs
 		addl $8, %esp
 
 		movl %ebp, %esp

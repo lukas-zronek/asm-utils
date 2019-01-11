@@ -5,20 +5,20 @@
 	.L.newline:
 		.asciz "\n"
 .text
-	.globl fputs
-	.type fputs, @function
-	fputs:
+	.globl dputs
+	.type dputs, @function
+	dputs:
 		pushl %ebp
 		movl %esp, %ebp
 
 		pushl STRING(%ebp)
 		pushl FD(%ebp)
-		call fprint
+		call dprint
 		addl $8, %esp
 
 		pushl $.L.newline
 		pushl FD(%ebp)
-		call fprint
+		call dprint
 
 		movl %ebp, %esp
 		popl %ebp
