@@ -1,4 +1,4 @@
-OBJS += copyfile.o dprintf.o itoa.o atoi.o errno.o dprint.o perror.o puts.o strerror.o errlst.o gets.o dputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o opendir_getdirentries.o readdir_getdirentries.o
+OBJS += copyfile.o dprintf.o itoa.o atoi.o errno.o dprint.o perror.o puts.o strerror.o errlst.o gets_s.o dputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o opendir_getdirentries.o readdir_getdirentries.o
 SYSCALLS_STUB := syscalls.cdecl.S.stub
 
 LDFLAGS_EXTRA := -dynamiclib -Wl,-read_only_relocs,suppress -install_name @rpath/$(LIB_SO)

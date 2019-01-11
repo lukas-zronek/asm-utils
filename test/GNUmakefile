@@ -1,7 +1,7 @@
 LIB_DIR := $(realpath ../lib)
-CFLAGS := -O0 -m32 -nostdinc -Wall -fno-builtin -fno-pie
+CFLAGS := -O0 -m32 -nostdinc -Wall -fno-builtin -fno-pie -fno-stack-protector
 LDFLAGS := -m32 -nostdlib
-EXEC := arg
+EXEC := arg hello
 LIB_NAME := sys
 UNAME := $(shell uname -s)
 CSU := $(LIB_DIR)/csu/start.o
