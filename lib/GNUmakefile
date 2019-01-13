@@ -7,26 +7,27 @@ LIB_NAME := sys
 LIB_AR := lib$(LIB_NAME).a
 LIB_SO := lib$(LIB_NAME).so
 UNAME := $(shell uname -s)
+SYSCALLS := gen/syscalls.S
 SYSCALLS_LIST := syscalls.$(UNAME).list
+SYSCALLS_TEMPLATE := syscalls.S.template
 
 include $(wildcard *.$(UNAME).in)
 
-syscalls.d: $(SYSCALLS_STUB) $(SYSCALLS_LIST)
-	./makesyscalls.sh $(SYSCALLS_STUB) $(SYSCALLS_LIST)
+all: $(SYSCALLS) $(LIB_AR) $(LIB_SO)
 
-include syscalls.d
-OBJS += $(patsubst %.S,%.o,$(SYSCALLS_SRC))
+$(SYSCALLS): $(SYSCALLS_TEMPLATE) $(SYSCALLS_LIST)
+	./makesyscalls.sh $(SYSCALLS_TEMPLATE) $(SYSCALLS_LIST) $(SYSCALLS)
 
-$(LIB_AR): syscalls.d $(OBJS)
+$(LIB_AR): $(OBJS)
 	$(AR) rs $@ $(OBJS)
 
-$(LIB_SO): syscalls.d $(OBJS)
+$(LIB_SO): $(OBJS)
 	$(CC) $(LDFLAGS) -o $(LIB_SO) $(OBJS)
 
 %.o : %.S
 	$(CC) $(CFLAGS) -I $(INC) -c $<
 
 clean:
-	rm -f *.o syscalls.d $(LIB_AR) $(LIB_SO) syscall_*.S
+	rm -f *.o $(LIB_AR) $(LIB_SO) $(SYSCALLS)
 
 .PHONY: all clean

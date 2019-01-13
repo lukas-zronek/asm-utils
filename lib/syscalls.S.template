@@ -1,0 +1,5 @@
+	.globl {NAME}
+	.type {NAME}, @function
+	{NAME}:
+		movl ${NR}, %eax
+		jmp .Lsyscall

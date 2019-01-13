@@ -1,4 +1,2 @@
 *.a
 *.so
-syscalls.d
-syscall_*.S
