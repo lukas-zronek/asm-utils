@@ -1,8 +1,6 @@
 #include <std.h>
 #include <io.h>
 
-#define PROG 0 /* argv[0] */
-
 #define ASCII_MINUS 45
 #define ASCII_S 115
 
@@ -68,7 +66,7 @@
 		jmp .Lreturn
 	.Llink_error:
 		movl ARGV(%ebp), %eax
-		pushl PROG(%eax)
+		pushl (%eax)
 		call perror
 		addl $4, %esp
 		jmp .Lerror
