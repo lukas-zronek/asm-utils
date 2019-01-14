@@ -6,6 +6,7 @@
 9 link
 38 rename
 39 mkdir
+83 symlink
 141 getdents
 162 nanosleep
 183 getcwd

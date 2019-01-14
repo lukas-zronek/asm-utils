@@ -4,6 +4,7 @@
 5 open
 6 close
 9 link
+57 symlink
 92 fcntl
 93 select
 128 rename
