@@ -3,6 +3,7 @@ mkdir
 cat
 env
 env2
+ln
 ls
 cp
 false
