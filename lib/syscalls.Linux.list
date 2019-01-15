@@ -4,6 +4,7 @@
 5 open
 6 close
 9 link
+10 unlink
 38 rename
 39 mkdir
 83 symlink
