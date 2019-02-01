@@ -24,7 +24,7 @@ $(LIB_AR): $(OBJS)
 $(LIB_SO): $(OBJS)
 	$(CC) $(LDFLAGS) -o $(LIB_SO) $(OBJS)
 
-%.o : %.S
+%.o: %.S
 	$(CC) $(CFLAGS) -I $(INC) -c $<
 
 clean:
