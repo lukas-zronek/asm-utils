@@ -3,8 +3,15 @@ UNAME := $(shell uname -s)
 
 include $(wildcard GNUmakefile.$(UNAME).in)
 
+all: start.o start_debug.o
+
 start.o: start.S
 	$(CC) $(CFLAGS) -c $<
+
+start_debug.o: start.S
+	$(CC) $(CFLAGS) -g -c $< -o $@
+
+.PHONY: all clean
 
 clean:
 	rm -f *.o

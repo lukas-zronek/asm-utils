@@ -5,6 +5,7 @@ EXEC := arg hello
 LIB_NAME := sys
 UNAME := $(shell uname -s)
 CSU := $(LIB_DIR)/csu/start.o
+CSU_DEBUG := $(LIB_DIR)/csu/start_debug.o
 
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< $(CSU) -l$(LIB_NAME)
 LDFLAGS_DYNAMIC = -dynamic -Wl,-rpath,$(LIB_DIR) -L$(LIB_DIR) -o $@ $< $(CSU) -l$(LIB_NAME)
@@ -14,6 +15,9 @@ DEFAULT_TARGET := dynamic
 include $(wildcard *.$(UNAME).in)
 
 all: $(DEFAULT_TARGET)
+
+debug: CSU := $(CSU_DEBUG)
+debug: all
 
 static: LDFLAGS += $(LDFLAGS_STATIC)
 static: $(EXEC)
