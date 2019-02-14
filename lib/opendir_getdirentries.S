@@ -49,10 +49,11 @@
 		movl $O_RDONLY, %eax
 		orl $O_DIRECTORY, %eax
 
+		pushl $0
 		pushl %eax
 		pushl FILENAME(%ebp)
 		call syscall_open
-		addl $8, %esp
+		addl $12, %esp
 
 		cmpl $-1, %eax
 		je .Lerror
