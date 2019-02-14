@@ -18,7 +18,6 @@
 		pushl %edx
 		pushl %esi
 		pushl %edi
-		pushl %ebp
 
 		/*
 		 * On x86 the Linux kernel expects the syscall number to be
@@ -40,7 +39,6 @@
 		movl %eax, _errno
 		movl $-1, %eax
 	.Lreturn:
-		popl %ebp
 		popl %edi
 		popl %esi
 		popl %edx
