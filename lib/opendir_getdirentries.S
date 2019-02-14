@@ -67,7 +67,7 @@
 		pushl $buffer_data
 		pushl dir+DIR_FD
 		call syscall_getdirentries
-		addl $12, %esp
+		addl $16, %esp
 
 		cmpl $-1, %eax
 		je .Lerror
