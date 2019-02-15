@@ -2,37 +2,19 @@
  * Syscall for FreeBSD and macOS
  */
 
-#define ARG_1 8
-#define ARG_2 12
-#define ARG_3 16
-#define ARG_4 20
-#define ARG_5 24
-
 .text
 	.Lsyscall:
-		pushl %ebp
-		movl %esp, %ebp
-
 		/*
 		 * On x86 the FreeBSD and macOS kernel use
 		 * the C calling convention to pass parameters
 		 * and the syscall number is placed in %eax.
 		 */
-		pushl ARG_5(%ebp)
-		pushl ARG_4(%ebp)
-		pushl ARG_3(%ebp)
-		pushl ARG_2(%ebp)
-		pushl ARG_1(%ebp)
-		call .Lkernel
-
+		int $0x80
 		/*
 		 * The carry flag is set when an error occurs.
 		 */
 		jc .Lerror
 		jmp .Lreturn
-	.Lkernel:
-		int $0x80
-		ret
 	.Lerror:
 		/*
 		 * XXX Some syscalls such as fork return the value in %edx.
@@ -42,8 +24,6 @@
 		movl %eax, _errno
 		movl $-1, %eax
 	.Lreturn:
-		movl %ebp, %esp
-		popl %ebp
 		ret
 
 /*
