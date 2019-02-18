@@ -17,6 +17,7 @@ include $(wildcard *.$(UNAME).in)
 all: $(DEFAULT_TARGET)
 
 debug: CSU := $(CSU_DEBUG)
+debug: CFLAGS += -g
 debug: all
 
 static: LDFLAGS += $(LDFLAGS_STATIC)

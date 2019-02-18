@@ -15,6 +15,9 @@ include $(wildcard *.$(UNAME).in)
 
 all: $(SYSCALLS) $(LIB_AR) $(LIB_SO)
 
+debug: CFLAGS += -g
+debug: all
+
 $(SYSCALLS): $(SYSCALLS_TEMPLATE) $(SYSCALLS_LIST)
 	./makesyscalls.sh $(SYSCALLS_TEMPLATE) $(SYSCALLS_LIST) $(SYSCALLS)
 

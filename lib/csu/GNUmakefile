@@ -3,7 +3,8 @@ UNAME := $(shell uname -s)
 
 include $(wildcard GNUmakefile.$(UNAME).in)
 
-all: start.o start_debug.o
+all: start.o
+debug: start_debug.o
 
 start.o: start.S
 	$(CC) $(CFLAGS) -c $<
