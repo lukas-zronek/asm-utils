@@ -1,0 +1,1 @@
+OBJS += syscalls.cdecl.o copyfile.o dprintf.o itoa.o atoi.o errno.o dprint.o perror.o puts.o strerror.o errlst.o gets_s.o dputs.o pow.o strlen.o getcwd_syscall.o sleep_nanosleep.o opendir_getdirentries.o readdir_getdirentries.o

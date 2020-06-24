@@ -1,0 +1,13 @@
+1 exit
+3 read
+4 write
+5 open
+6 close
+9 link
+10 unlink
+57 symlink
+128 rename
+136 mkdir
+196 getdirentries
+240 nanosleep
+296 getcwd
