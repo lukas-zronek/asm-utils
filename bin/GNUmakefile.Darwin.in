@@ -6,6 +6,4 @@ else
 LDFLAGS += -Wl,-e,_start
 endif
 
-DEFAULT_TARGET := static
-
 export MACOSX_DEPLOYMENT_TARGET=10.05

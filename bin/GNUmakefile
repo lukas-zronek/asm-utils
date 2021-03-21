@@ -12,7 +12,7 @@ INC_PLATFORM := $(INC)/$(UNAME)
 LDFLAGS_STATIC = -static -L$(LIB_DIR) -o $@ $< $(CSU) -l$(LIB_NAME)
 LDFLAGS_DYNAMIC = -dynamic -Wl,-rpath,$(LIB_DIR) -L$(LIB_DIR) -o $@ $< $(CSU) -l$(LIB_NAME)
 
-DEFAULT_TARGET := dynamic
+DEFAULT_TARGET := static
 
 include $(wildcard *.$(UNAME).in)
 
