@@ -1,7 +1,7 @@
 SUBDIRS := lib lib/csu bin
-all debug clean: $(SUBDIRS)
+all debug dynamic clean: $(SUBDIRS)
 
 $(SUBDIRS):
 	$(MAKE) -r -C $@ $(MAKECMDGOALS)
 
-.PHONY: all debug clean $(SUBDIRS)
+.PHONY: all debug dynamic clean $(SUBDIRS)

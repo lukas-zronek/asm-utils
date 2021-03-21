@@ -14,7 +14,8 @@ INC_PLATFORM := $(INC)/$(UNAME)
 
 include $(wildcard *.$(UNAME).in)
 
-all: $(SYSCALLS) $(LIB_AR) $(LIB_SO)
+all: $(SYSCALLS) $(LIB_AR)
+dynamic: $(SYSCALLS) $(LIB_SO)
 
 debug: CFLAGS += -g
 debug: all
@@ -34,4 +35,4 @@ $(LIB_SO): $(OBJS)
 clean:
 	rm -f *.o $(LIB_AR) $(LIB_SO) $(SYSCALLS)
 
-.PHONY: all clean
+.PHONY: all dynamic clean

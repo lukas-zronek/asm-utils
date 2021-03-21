@@ -3,6 +3,7 @@ UNAME := $(shell uname -s)
 
 include $(wildcard GNUmakefile.$(UNAME).in)
 
+dynamic: all
 all: start.o
 debug: start_debug.o
 
@@ -17,4 +18,4 @@ start_debug.o: start.S
 clean:
 	rm -f *.o
 
-.PHONY: clean
+.PHONY: dynamic clean
