@@ -21,6 +21,10 @@
 
 #define DIR 8
 
+#define BUFFER -4
+#define OFFSET -8
+#define NBYTES -12
+
 #define DIRENT_RECLEN_OFFSET 8
 #define DIRENT_NAME_OFFSET 10
 
@@ -31,26 +35,59 @@
 		pushl %ebp
 		movl %esp, %ebp
 
+		subl $-NBYTES, %esp
+
 		pushl %ebx
 		pushl %ecx
+		pushl %edx
 
 		movl DIR(%ebp), %eax
 		movl DIR_BUFFER(%eax), %ebx
-		addl DIR_OFFSET(%eax), %ebx
+		movl %ebx, BUFFER(%ebp)
 
-		/* save offset to next dirent */
-		xorl %ecx, %ecx
-		/* unsigned short int (2 Bytes) */
-		movw DIRENT_RECLEN_OFFSET(%ebx), %cx
-		addl %ecx, DIR_OFFSET(%eax)
+		xorl %ebx, %ebx
+		movw DIR_OFFSET(%eax), %bx
+		movl %ebx, OFFSET(%ebp)
 
-		xorl %eax, %eax
+		movl DIR_NBYTES(%eax), %ecx
 
-		cmpl $0, %ecx
-		je .Lquit
+		cmpl %ebx, %ecx
+		jg .Lreaddir_skip_getdents
+
+		pushl $DIR_BUFFER_SIZE
+		pushl BUFFER(%ebp)
+		pushl DIR_FD(%eax)
+		call syscall_getdents
+		addl $12, %esp
+
+		movl DIR(%ebp), %ebx
+		movl %eax, DIR_NBYTES(%ebx)
+
+		movl $0, OFFSET(%ebp)
+
+		cmpl $0, %eax
+		jle .Lquit
+	.Lreaddir_skip_getdents:
+		movl BUFFER(%ebp), %ebx
+
+		movl OFFSET(%ebp), %ecx
+
+		addl %ecx, %ebx
+
+		xorl %edx, %edx
+		movw DIRENT_RECLEN_OFFSET(%ebx), %dx
+
+		addl %edx, %ecx
+
+		movl %ecx, OFFSET(%ebp)
 
 		leal DIRENT_NAME_OFFSET(%ebx), %eax
 	.Lquit:
+		movl DIR(%ebp), %ebx
+		movl OFFSET(%ebp), %ecx
+		movl %ecx, DIR_OFFSET(%ebx)
+
+		popl %edx
 		popl %ecx
 		popl %ebx
 

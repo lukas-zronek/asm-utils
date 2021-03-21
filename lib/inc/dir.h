@@ -7,5 +7,6 @@
 #define DIR_FD 0
 #define DIR_BUFFER 4
 #define DIR_OFFSET 8
+#define DIR_NBYTES 12
 
 #endif
