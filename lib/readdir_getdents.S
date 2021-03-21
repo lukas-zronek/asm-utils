@@ -3,30 +3,18 @@
  *
  * This function returns a pointer to the next directory name in the directory
  *
- * This implementation uses the getdents syscall of the Linux kernel:
- *
- * 	int getdents(unsigned int fd, struct linux_dirent *dirp,
- *		unsigned int count);
- *
- *	struct linux_dirent {
- *		unsigned long d_ino;
- *		unsigned long d_off;
- *		unsigned short d_reclen;
- *		char d_name[1];
- *	};
+ * This implementation uses the getdents syscall of the Linux kernel.
  *
  */
 
 #include <dir.h>
+#include <dirent.h>
 
 #define DIR 8
 
 #define BUFFER -4
 #define OFFSET -8
 #define NBYTES -12
-
-#define DIRENT_RECLEN_OFFSET 8
-#define DIRENT_NAME_OFFSET 10
 
 .text
 	.globl readdir
