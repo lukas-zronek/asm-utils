@@ -1,0 +1,12 @@
+OBJS += syscalls.cdecl.o copyfile.o dprintf.o itoa.o atoi.o errno.o dprint.o perror.o puts.o strerror.o errlst.o gets_s.o dputs.o pow.o strlen.o getcwd_syscall.o
+
+VERSION_MAJOR := $(shell uname -r | cut -d. -f1)
+VERSION_MINOR := $(shell uname -r | cut -d. -f2)
+
+ifeq ($(shell [[ $(VERSION_MAJOR) -ge 5 && $(VERSION_MINOR) -ge 5 ]]; echo $$?),0)
+	OBJS += sleep_nanosleep_t64.o opendir_getdents.o readdir_getdents.o
+else
+	OBJS += sleep_nanosleep.o
+endif
+
+LDFLAGS_EXTRA += -z notext

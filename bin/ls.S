@@ -42,7 +42,7 @@
 		addl $4, %esp
 
 		cmpl $0, %eax
-		je .Lquit
+		jle .Lquit
 
 		pushl %eax
 		call puts

@@ -1,0 +1,2 @@
+EXEC := cat cp echo env env2 false mkdir mv pwd true wc sleep ls
+DEFAULT_TARGET := static

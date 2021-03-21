@@ -31,7 +31,7 @@
 
 .bss
 	.comm buffer_data, DIR_BUFFER_SIZE
-	.comm dir, 12
+	.comm dir, 16
 .text
 	.globl opendir
 	.type opendir, @function
@@ -53,17 +53,9 @@
 
 		movl %eax, dir+DIR_FD
 
-		pushl $DIR_BUFFER_SIZE
-		pushl $buffer_data
-		pushl dir+DIR_FD
-		call syscall_getdents
-		addl $12, %esp
-
-		cmpl $-1, %eax
-		je .Lerror
-
 		movl $buffer_data, dir+DIR_BUFFER
 		movl $0, dir+DIR_OFFSET
+		movl $0, dir+DIR_NBYTES
 
 		movl $dir, %eax
 	.Lquit:
