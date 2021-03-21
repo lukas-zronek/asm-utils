@@ -10,6 +10,7 @@ UNAME := $(shell uname -s)
 SYSCALLS := gen/syscalls.S
 SYSCALLS_LIST := syscalls.$(UNAME).list
 SYSCALLS_TEMPLATE := syscalls.S.template
+INC_PLATFORM := $(INC)/$(UNAME)
 
 include $(wildcard *.$(UNAME).in)
 
@@ -28,7 +29,7 @@ $(LIB_SO): $(OBJS)
 	$(CC) $(LDFLAGS) -o $(LIB_SO) $(OBJS)
 
 %.o: %.S
-	$(CC) $(CFLAGS) -I $(INC) -c $<
+	$(CC) $(CFLAGS) -I $(INC_PLATFORM) -I $(INC) -c $<
 
 clean:
 	rm -f *.o $(LIB_AR) $(LIB_SO) $(SYSCALLS)
