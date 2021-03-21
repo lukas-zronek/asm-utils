@@ -11,3 +11,4 @@
 196 getdirentries
 240 nanosleep
 296 getcwd
+390 getdents
