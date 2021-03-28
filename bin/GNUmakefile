@@ -40,4 +40,4 @@ strip:
 clean:
 	rm -f *.o $(EXEC)
 
-.PHONY: all clean static dynamic strip
+.PHONY: all debug clean static dynamic strip

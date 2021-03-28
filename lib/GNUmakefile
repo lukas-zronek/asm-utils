@@ -35,4 +35,4 @@ $(LIB_SO): $(OBJS)
 clean:
 	rm -f *.o $(LIB_AR) $(LIB_SO) $(SYSCALLS)
 
-.PHONY: all dynamic clean
+.PHONY: all debug dynamic clean

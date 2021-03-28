@@ -13,9 +13,7 @@ start.o: start.S
 start_debug.o: start.S
 	$(CC) $(CFLAGS) -g -c $< -o $@
 
-.PHONY: all clean
-
 clean:
 	rm -f *.o
 
-.PHONY: dynamic clean
+.PHONY: all debug dynamic clean
