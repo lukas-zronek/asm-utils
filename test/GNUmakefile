@@ -1,6 +1,6 @@
 LIB_DIR := $(realpath ../lib)
-CFLAGS := -O0 -m32 -nostdinc -Wall -fno-builtin -fno-pie -fno-stack-protector
-LDFLAGS := -m32 -nostdlib
+CFLAGS := -O0 -arch i386 -m32 -nostdinc -Wall -fno-builtin -fno-pie -fno-stack-protector
+LDFLAGS := -arch i386 -m32 -nostdlib
 EXEC := arg hello
 LIB_NAME := sys
 UNAME := $(shell uname -s)
