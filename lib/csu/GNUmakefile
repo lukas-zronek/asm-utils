@@ -1,4 +1,4 @@
-CFLAGS := -arch i386 -m32 -nostdinc -Wall
+CFLAGS := -m32 -nostdinc -Wall
 UNAME := $(shell uname -s)
 
 include $(wildcard GNUmakefile.$(UNAME).in)
