@@ -1,4 +1,4 @@
 OBJS += syscalls.cdecl.o copyfile.o dprintf.o itoa.o atoi.o errno.o dprint.o perror.o puts.o strerror.o errlst.o gets_s.o dputs.o pow.o strlen.o getcwd_fcntl_getpath.o sleep_select.o opendir_getdirentries.o readdir_getdirentries.o
 
 LDFLAGS_EXTRA := -dynamiclib -Wl,-read_only_relocs,suppress -install_name @rpath/$(LIB_SO)
-export MACOSX_DEPLOYMENT_TARGET=10.05
+export MACOSX_DEPLOYMENT_TARGET=10.5
