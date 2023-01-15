@@ -1,6 +1,5 @@
 AR := ar
 INC := inc
-CFLAGS := -m32 -nostdinc -Wall -include $(INC)/platform.h
 LDFLAGS_EXTRA := -Wl,-shared -Wl,--no-undefined
 LDFLAGS = -m32 -nostdlib $(LDFLAGS_EXTRA)
 LIB_NAME := sys
@@ -11,6 +10,7 @@ SYSCALLS := gen/syscalls.S
 SYSCALLS_LIST := syscalls.$(UNAME).list
 SYSCALLS_TEMPLATE := syscalls.S.template
 INC_PLATFORM := $(INC)/$(UNAME)
+CFLAGS := -m32 -nostdinc -Wall -include platform.h
 
 include $(wildcard *.$(UNAME).in)
 

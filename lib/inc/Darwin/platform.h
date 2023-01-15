@@ -5,19 +5,15 @@
  * .type directive is not available on macOS, it is overwritten with
  * an empty macro.
  */
-#ifdef __APPLE__
 .macro .type
-.endm
-#endif
+.endmacro
 
-#ifdef __APPLE__
+.macro .bss
+.section __DATA,__bss
+.endmacro
+
 .macro .rodata
 .section __TEXT,__const
-.endm
-#else
-.macro .rodata
-.section .rodata
-.endm
-#endif
+.endmacro
 
 #endif /* _PLATFORM_H_ */
