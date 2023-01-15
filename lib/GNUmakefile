@@ -10,7 +10,7 @@ SYSCALLS := gen/syscalls.S
 SYSCALLS_LIST := syscalls.$(UNAME).list
 SYSCALLS_TEMPLATE := syscalls.S.template
 INC_PLATFORM := $(INC)/$(UNAME)
-CFLAGS := -m32 -nostdinc -Wall -include platform.h
+CFLAGS := -m32 -nostdinc -Wall -include asm.h
 
 include $(wildcard *.$(UNAME).in)
 

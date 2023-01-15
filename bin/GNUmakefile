@@ -1,6 +1,6 @@
 LIB_DIR := $(realpath ../lib)
 INC := $(LIB_DIR)/inc
-CFLAGS := -m32 -nostdinc -Wall -include platform.h
+CFLAGS := -m32 -nostdinc -Wall -include asm.h
 LDFLAGS := -m32 -nostdlib -no-pie
 EXEC := $(patsubst %.S,%,$(wildcard *.S))
 LIB_NAME := sys

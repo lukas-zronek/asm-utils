@@ -1,5 +1,5 @@
-#ifndef _PLATFORM_H_
-#define _PLATFORM_H_
+#ifndef _ASM_H_
+#define _ASM_H_
 
 /*
  * .type directive is not available on macOS, it is overwritten with
@@ -16,4 +16,4 @@
 .section __TEXT,__const
 .endmacro
 
-#endif /* _PLATFORM_H_ */
+#endif /* _ASM_H_ */
